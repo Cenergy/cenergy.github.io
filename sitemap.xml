@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2019/09/05/%E4%BD%BF%E7%94%A8coding-pages%E6%97%B6%E5%87%BA%E7%8E%B0%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E4%B8%A2%E5%A4%B1/</loc>
+    <loc>http://yoursite.com/posts/56477/</loc>
     
-    <lastmod>2019-09-05T01:47:30.334Z</lastmod>
+    <lastmod>2019-09-05T12:52:45.886Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/09/01/My-Gallery/</loc>
+    <loc>http://yoursite.com/posts/13135/</loc>
     
-    <lastmod>2019-09-04T05:01:35.201Z</lastmod>
+    <lastmod>2019-09-05T12:40:02.982Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/posts/20689/</loc>
+    
+    <lastmod>2019-09-05T12:40:02.967Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/posts/16107/</loc>
+    
+    <lastmod>2019-09-05T12:40:02.963Z</lastmod>
     
   </url>
   
@@ -33,20 +47,6 @@
     <loc>http://yoursite.com/about/index.html</loc>
     
     <lastmod>2019-09-03T04:34:50.631Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/09/01/%E6%88%91%E5%B0%B1%E8%AF%95%E8%AF%95/</loc>
-    
-    <lastmod>2019-09-03T04:34:50.630Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/09/03/hello-world/</loc>
-    
-    <lastmod>2019-09-03T04:34:50.628Z</lastmod>
     
   </url>
   
