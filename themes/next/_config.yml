@@ -198,12 +198,11 @@ social_icons:
 #github_banner: https://github.com/yourname || Follow me on GitHub
 
 # Blog rolls
-links_icon: link
-links_title: Links
-links_layout: block
+links_title: 友情链接
+#links_layout: block
 #links_layout: inline
-#links:
-#Title: http://example.com
+links:
+  小小的诗: https://ouyangresume.github.io/
 
 # Sidebar Avatar
 avatar:
@@ -671,13 +670,13 @@ rating:
 # Show number of visitors to each article.
 # You can visit https://leancloud.cn get AppID and AppKey.
 leancloud_visitors:
-  enable: false
-  app_id: #<app_id>
-  app_key: #<app_key>
+  enable: true
+  app_id: diTi74ah5rpPDNa6bjS0VjqN-gzGzoHsz
+  app_key: nHbjOKICQKYQtsVVJjeHYl0O
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security
   # If you don't care about security in leancloud counter and just want to use it directly
   # (without hexo-leancloud-counter-security plugin), set `security` to `false`.
-  security: true
+  security: false
   betterPerformance: false
 
 # Another tool to show number of visitors to each article.

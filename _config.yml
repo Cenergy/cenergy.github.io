@@ -42,11 +42,6 @@ render_drafts: false
 post_asset_folder: true
 relative_link: false
 future: true
-highlight:
-  enable: true
-  line_number: true
-  auto_detect: false
-  tab_replace:
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -114,3 +109,53 @@ baidusitemap:
 ##
 encrypt:
   enable: true
+
+# 代码高亮显示
+# highlight:
+#   enable: true
+#   line_number: true
+#   auto_detect: false
+#   tab_replace:
+highlight:
+  enable: false
+
+prism_plugin:
+  mode: "preprocess" # realtime/preprocess
+  theme: "atom-dark"
+  line_number: false # default false
+  custom_css: "" # optional
+
+# 文章字数和阅读时长
+# symbols_count_time:
+#   #文章内是否显示
+#   symbols: true
+#   time: true
+#   # 网页底部是否显示
+#   total_symbols: true
+#   total_time: true
+
+# 博文压缩
+neat_enable: true
+# 压缩html
+neat_html:
+  enable: true
+  exclude:
+# 压缩css
+neat_css:
+  enable: true
+  exclude:
+    - "**/*.min.css"
+# 压缩js
+neat_js:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+    - "**/*.min.js"
+    - "**/jquery.fancybox.pack.js"
+    - "**/index.js"
+    - "**/love.js"
+    - "**/**min.js"
+# 压缩博文配置结束
+
