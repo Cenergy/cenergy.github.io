@@ -220,12 +220,12 @@ avatar:
 # Table Of Contents in the Sidebar
 toc:
   enable: true
+
   # Automatically add list number to toc.
   number: true
+
   # If true, all words will placed on next lines if header width longer then sidebar width.
-  wrap: false
-  # Maximum heading depth of generated toc. You can set it in one post through `toc_max_depth` var.
-  max_depth: 6
+  wrap: true
 
 sidebar:
   # Sidebar Position, available values: left | right (only for Pisces | Gemini).
@@ -609,7 +609,7 @@ needmoreshare2:
 #google_site_verification:
 
 # Google Analytics
-#google_analytics:
+google_analytics: UA-147234769-1
 
 # Bing Webmaster tools verification setting
 # See: https://www.bing.com/webmaster

@@ -12,7 +12,7 @@ timezone:
 
 # URL  #绑定域名
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://blog.aigisss.com
 root: /
 # permalink: :year/:month/:day/:title/
 # permalink_defaults:
@@ -102,6 +102,7 @@ leancloud_visitors:
 # 自动生成sitemap
 sitemap:
   path: sitemap.xml
+
 baidusitemap:
   path: baidusitemap.xml
 
@@ -140,6 +141,7 @@ neat_enable: true
 neat_html:
   enable: true
   exclude:
+    - "google078dd53431bb11ee.html"
 # 压缩css
 neat_css:
   enable: true
@@ -159,3 +161,26 @@ neat_js:
     - "**/**min.js"
 # 压缩博文配置结束
 
+robotstxt:
+  useragent: "*"
+  disallow:
+    - /admin/
+    - /vendors/
+    - /js/
+    - /css/
+    - /fonts/
+    - /fancybox/
+    - /fonts/
+    - .js$
+    - .css$
+    - .jpg$
+    - .jpeg$
+    - .gif$
+    - .png$
+    - .bmp$
+  allow:
+    - /
+    - /archives/
+    - /categories/
+    - /tags/
+  sitemap: /sitemap.xml
