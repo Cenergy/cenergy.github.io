@@ -1,6 +1,6 @@
 ---
 title: 使用coding-pages时出现静态文件丢失
-abbrlink: 13135
+abbrlink: 372cd070
 date: 2019-09-05 09:32:57
 tags:
 ---
