@@ -54,12 +54,12 @@ favicon:
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link, and install hexo-generator-feed: `npm install hexo-generator-feed --save`.
 # Set rss to specific value if you have burned your feed already.
-rss:
+rss: /atom.xml
 
 footer:
   # Specify the date when the site was setup.
   # If not defined, current year will be used.
-  #since: 2015
+  since: 2019
 
   # Icon between year and copyright info.
   icon:
@@ -67,12 +67,12 @@ footer:
     # `heart` is recommended with animation in red (#ff0000).
     name: user
     # If you want to animate the icon, set it to true.
-    animated: false
+    animated: true
     # Change the color of icon, using Hex Code.
     color: "#808080"
 
   # If not defined, `author` from Hexo main config will be used.
-  copyright:
+  copyright: "AIGISSS 爱即是诗"
   # -------------------------------------------------------------
   powered:
     # Hexo link (Powered by Hexo).
@@ -220,12 +220,12 @@ avatar:
 # Table Of Contents in the Sidebar
 toc:
   enable: true
+
   # Automatically add list number to toc.
   number: true
+
   # If true, all words will placed on next lines if header width longer then sidebar width.
-  wrap: false
-  # Maximum heading depth of generated toc. You can set it in one post through `toc_max_depth` var.
-  max_depth: 6
+  wrap: true
 
 sidebar:
   # Sidebar Position, available values: left | right (only for Pisces | Gemini).
@@ -307,9 +307,9 @@ codeblock:
   border_radius:
   # Add copy button on codeblock
   copy_button:
-    enable: false
+    enable: true
     # Show text copy result
-    show_result: false
+    show_result: true
 
 # Wechat Subscriber
 #wechat_subscriber:
@@ -609,7 +609,7 @@ needmoreshare2:
 #google_site_verification:
 
 # Google Analytics
-#google_analytics:
+google_analytics: UA-147234769-1
 
 # Bing Webmaster tools verification setting
 # See: https://www.bing.com/webmaster
