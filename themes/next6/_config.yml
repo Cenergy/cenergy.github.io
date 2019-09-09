@@ -54,7 +54,8 @@ favicon:
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link, and install hexo-generator-feed: `npm install hexo-generator-feed --save`.
 # Set rss to specific value if you have burned your feed already.
-rss:
+rss: /atom.xml
+
 
 footer:
   # Specify the date when the site was setup.
@@ -328,7 +329,7 @@ reward:
 # Related popular posts
 # Dependencies: https://github.com/tea3/hexo-related-popular-posts
 related_posts:
-  enable: false
+  enable: true
   title: # custom header, leave empty to use the default one
   display_in_home: false
   params:
@@ -337,6 +338,7 @@ related_posts:
     #isDate: false
     #isImage: false
     #isExcerpt: false
+    
 
 # Post edit
 # Dependencies: https://github.com/hexojs/hexo-deployer-git
@@ -689,14 +691,19 @@ firestore:
 
 # Show Views/Visitors of the website/page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi
+# busuanzi统计
 busuanzi_count:
-  enable: false
+  enable: true
+  # 总访客数
   total_visitors: true
   total_visitors_icon: user
+  # 总浏览量
   total_views: true
   total_views_icon: eye
+  # 文章浏览量
   post_views: true
   post_views_icon: eye
+
 
 # Tencent analytics ID
 #tencent_analytics:
@@ -738,8 +745,9 @@ algolia_search:
 
 # Local search
 # Dependencies: https://github.com/theme-next/hexo-generator-searchdb
+# 自带的搜索
 local_search:
-  enable: false
+  enable: true
   # if auto, trigger search by changing input
   # if manual, trigger search by pressing enter key or search button
   trigger: auto
@@ -801,9 +809,12 @@ reading_progress:
 #! ---------------------------------------------------------------
 
 # Use velocity to animate everything.
+
 motion:
+# 启用
   enable: true
-  async: false
+  # 异步加载
+  async: true
   transition:
     # Transition variants:
     # fadeIn | fadeOut | flipXIn | flipXOut | flipYIn | flipYOut | flipBounceXIn | flipBounceXOut | flipBounceYIn | flipBounceYOut
@@ -812,12 +823,18 @@ motion:
     # slideUpIn | slideUpOut | slideDownIn | slideDownOut | slideLeftIn | slideLeftOut | slideRightIn | slideRightOut
     # slideUpBigIn | slideUpBigOut | slideDownBigIn | slideDownBigOut | slideLeftBigIn | slideLeftBigOut | slideRightBigIn | slideRightBigOut
     # perspectiveUpIn | perspectiveUpOut | perspectiveDownIn | perspectiveDownOut | perspectiveLeftIn | perspectiveLeftOut | perspectiveRightIn | perspectiveRightOut
+	# 文章摘要动画
     post_block: fadeIn
+    # 加载各种页面动画（分类，关于，标签等等）
     post_header: slideDownIn
+    # 文章详情动画
     post_body: slideDownIn
+    # 
     coll_header: slideLeftIn
     # Only for Pisces | Gemini.
+    # 侧边栏（人物头像的那部分）
     sidebar: slideUpIn
+
 
 # Fancybox. There is support for old version 2 and new version 3.
 # Choose only any one variant, do not need to install both.
