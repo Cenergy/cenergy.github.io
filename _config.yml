@@ -95,3 +95,84 @@ search:
   field: post
   format: html
   limit: 10000
+
+# 自动生成sitemap
+sitemap:
+  path: sitemap.xml
+
+baidusitemap:
+  path: baidusitemap.xml
+
+# Security
+##
+encrypt:
+  enable: true
+
+# 文章字数和阅读时长
+# symbols_count_time:
+#   #文章内是否显示
+#   symbols: true
+#   time: true
+#   # 网页底部是否显示
+#   total_symbols: true
+#   total_time: true
+
+# 博文压缩
+neat_enable: true
+# 压缩html
+neat_html:
+  enable: true
+  exclude:
+    - "google078dd53431bb11ee.html"
+# 压缩css
+neat_css:
+  enable: true
+  exclude:
+    - "**/*.min.css"
+# 压缩js
+neat_js:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+    - "**/*.min.js"
+    - "**/jquery.fancybox.pack.js"
+    - "**/index.js"
+    - "**/love.js"
+    - "**/**min.js"
+# 压缩博文配置结束
+
+robotstxt:
+  useragent: "*"
+  disallow:
+    - /admin/
+    - /vendors/
+    - /js/
+    - /css/
+    - /fonts/
+    - /fancybox/
+    - /fonts/
+    - .js$
+    - .css$
+    - .jpg$
+    - .jpeg$
+    - .gif$
+    - .png$
+    - .bmp$
+  allow:
+    - /
+    - /archives/
+    - /categories/
+    - /tags/
+  sitemap: /sitemap.xml
+
+plugin:
+  - hexo-generator-feed
+
+#Feed Atom
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
