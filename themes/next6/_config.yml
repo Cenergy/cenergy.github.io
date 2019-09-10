@@ -588,16 +588,18 @@ gitalk:
 # Weibo,Wechat,Douban,QQZone,Twitter,Linkedin,Mailto,Reddit,Delicious,StumbleUpon,Pinterest,Facebook,GooglePlus,
 # Slashdot,Technorati,Posterous,Tumblr,GoogleBookmarks,Newsvine,Evernote,Friendfeed,Vkontakte,Odnoklassniki,Mailru
 needmoreshare2:
-  enable: false
+  enable: true
   postbottom:
+    #文章底部
     enable: false
     options:
       iconStyle: box
       boxForm: horizontal
       position: bottomCenter
       networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook
+      #左下角悬浮按钮
   float:
-    enable: false
+    enable: true
     options:
       iconStyle: box
       boxForm: horizontal
@@ -703,7 +705,6 @@ busuanzi_count:
   # 文章浏览量
   post_views: true
   post_views_icon: eye
-
 
 # Tencent analytics ID
 #tencent_analytics:
@@ -811,7 +812,7 @@ reading_progress:
 # Use velocity to animate everything.
 
 motion:
-# 启用
+  # 启用
   enable: true
   # 异步加载
   async: true
@@ -823,24 +824,23 @@ motion:
     # slideUpIn | slideUpOut | slideDownIn | slideDownOut | slideLeftIn | slideLeftOut | slideRightIn | slideRightOut
     # slideUpBigIn | slideUpBigOut | slideDownBigIn | slideDownBigOut | slideLeftBigIn | slideLeftBigOut | slideRightBigIn | slideRightBigOut
     # perspectiveUpIn | perspectiveUpOut | perspectiveDownIn | perspectiveDownOut | perspectiveLeftIn | perspectiveLeftOut | perspectiveRightIn | perspectiveRightOut
-	# 文章摘要动画
+    # 文章摘要动画
     post_block: fadeIn
     # 加载各种页面动画（分类，关于，标签等等）
     post_header: slideDownIn
     # 文章详情动画
     post_body: slideDownIn
-    # 
+    #
     coll_header: slideLeftIn
     # Only for Pisces | Gemini.
     # 侧边栏（人物头像的那部分）
     sidebar: slideUpIn
 
-
 # Fancybox. There is support for old version 2 and new version 3.
 # Choose only any one variant, do not need to install both.
 # To install 2.x: https://github.com/theme-next/theme-next-fancybox
 # To install 3.x: https://github.com/theme-next/theme-next-fancybox3
-fancybox: false
+fancybox: true
 
 # Added switch option for separated repo in 6.0.0.
 # Dependencies: https://github.com/theme-next/theme-next-fastclick
@@ -914,8 +914,8 @@ vendors:
   # fancybox: //cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js
   # fancybox_css: //cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css
   # fancybox_css: //cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css
-  fancybox:
-  fancybox_css:
+  fancybox: /lib/fancybox/jquery.fancybox.min.js
+  fancybox_css: /lib/fancybox/jquery.fancybox.min.css
 
   # Internal version: 1.0.6
   # See: https://github.com/ftlabs/fastclick
