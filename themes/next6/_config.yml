@@ -101,7 +101,7 @@ footer:
 # Available values: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
 creative_commons:
   license: by-nc-sa
-  sidebar: true
+  sidebar: false
   post: true
 
 # ---------------------------------------------------------------
@@ -327,12 +327,12 @@ reward:
   alipay: /images/alipay.jpg
   #bitcoin: /images/bitcoin.jpg
 
-# Related popular posts
+# Related popular posts 相关文章
 # Dependencies: https://github.com/tea3/hexo-related-popular-posts
 related_posts:
-  enable: false
+  enable: true #开启
   title: # custom header, leave empty to use the default one
-  display_in_home: false
+  display_in_home: false #显示在首页
   params:
     maxCount: 5
     #PPMixingRate: 0.0
@@ -372,7 +372,7 @@ custom_logo:
 # Code Highlight theme
 # Available values: normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: normal
+highlight_theme: night eighties
 
 # Enable "cheers" for archive page.
 cheers_enabled: true
@@ -438,7 +438,7 @@ font:
 
 # Math Equations Render Support
 math:
-  enable: false
+  enable: true
 
   # Default(true) will load mathjax/katex script on demand
   # That is it only render those page who has `mathjax: true` in Front Matter.
@@ -534,6 +534,7 @@ valine:
   avatar: mm # gravatar style
   guest_info: nick,mail,link # custom comment header
   pageSize: 10 # pagination size
+  language: zh-cn # language, available values: en, zh-cn
   visitor: false # leancloud-counter-security is not supported for now. When visitor is set to be true, appid and appkey are recommended to be the same as leancloud_visitors' for counter compatibility. Article reading statistic https://valine.js.org/visitor.html
 
 # Support for LiveRe comments system.
