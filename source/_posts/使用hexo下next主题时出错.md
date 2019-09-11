@@ -1,5 +1,4 @@
 ---
-
 title: 使用hexo下next主题时出错
 tags: 日常
 abbrlink: 326cb881
@@ -9,7 +8,7 @@ mathjax: true
 
 {% note danger %}
 
-####  next6.3+自带代码复制，使用代码高亮插件时hexo-prism-plugin时会不起作用
+#### next6.3+自带代码复制，使用代码高亮插件时 hexo-prism-plugin 时会不起作用
 
 在主题下的`_config.yml`文件中设置：
 
@@ -21,4 +20,6 @@ issue：https://github.com/rozbo/hexo-abbrlink/issues/19
 
 {% endnote %}
 
-![1568105179054](20190909/1568105179054.png)
+![1568105179054](使用hexo下next主题时出错/1568105179054.png)
+
+![](使用hexo下next主题时出错/QQ%E5%9B%BE%E7%89%8720190911114226.png)

@@ -6,9 +6,9 @@ tags:
 mathjax: true
 ---
 
-##  前言
+## 前言
 
-在 Hexo 中有两份主要的配置文件，其名称都是 _config.yml。 其中，一份位于站点根目录下，主要包含 Hexo 本身的配置；另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。
+在 Hexo 中有两份主要的配置文件，其名称都是 \_config.yml。 其中，一份位于站点根目录下，主要包含 Hexo 本身的配置；另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。
 为了描述方便，在以下说明中，将前者称为**站点配置文件**， 后者称为**主题配置文件**。
 
 <!--more-->
@@ -17,24 +17,24 @@ mathjax: true
 
 ```yaml
 footer:
-#建站时间
+  #建站时间
   since: 2018
-#作者头像并且是动画效果
+  #作者头像并且是动画效果
   icon:
     name: user
     animated: true
     color: "##66CDAA"
-#显示版权作者
+  #显示版权作者
   copyright: aigisss 爱即是诗
-#不显示Hexo
+  #不显示Hexo
   powered:
     enable: false
     version: false
-#不显示主题和版本
+  #不显示主题和版本
   theme:
     enable: false
     version: false
-#显示备案号
+  #显示备案号
   beian:
     enable: true
     icp: 赣ICP备18013338-1号
@@ -69,7 +69,7 @@ codeblock:
 needmoreshare2:
   enable: true
   postbottom:
-  #文章底部
+    #文章底部
     enable: false
     options:
       iconStyle: box
@@ -116,7 +116,7 @@ reading_progress:
 
 ```yaml
 motion:
-# 启用
+  # 启用
   enable: true
   # 异步加载
   async: true
@@ -128,13 +128,13 @@ motion:
     # slideUpIn | slideUpOut | slideDownIn | slideDownOut | slideLeftIn | slideLeftOut | slideRightIn | slideRightOut
     # slideUpBigIn | slideUpBigOut | slideDownBigIn | slideDownBigOut | slideLeftBigIn | slideLeftBigOut | slideRightBigIn | slideRightBigOut
     # perspectiveUpIn | perspectiveUpOut | perspectiveDownIn | perspectiveDownOut | perspectiveLeftIn | perspectiveLeftOut | perspectiveRightIn | perspectiveRightOut
-	# 文章摘要动画
+    # 文章摘要动画
     post_block: bounceIn
     # 加载各种页面动画（分类，关于，标签等等）
     post_header: fadeIn
     # 文章详情动画
     post_body: fadeIn
-    # 
+    #
     coll_header: fadeIn
     # Only for Pisces | Gemini.
     # 侧边栏（人物头像的那部分）
@@ -164,7 +164,7 @@ local_search:
   unescape: false
 ```
 
-## 添加RSS订阅
+## 添加 RSS 订阅
 
 ```yaml
 npm install hexo-generator-feed --save
@@ -179,7 +179,7 @@ feed: # RSS订阅插件
   limit: 0 #0就是代表所有
 ```
 
-##  数学公式
+## 数学公式
 
 ```yaml
 # Math Equations Render Support
@@ -193,10 +193,9 @@ math:
 
   engine: mathjax
   #engine: katex
-
 ```
 
-还需要在文章的Front-matter里打开mathjax开关，比如：
+还需要在文章的 Front-matter 里打开 mathjax 开关，比如：
 
 ```yaml
 title: 使用hexo下next主题搭建博客的记录
@@ -206,11 +205,11 @@ date: 2019-09-09 09:58:21
 mathjax: true
 ```
 
->网上一大堆说会出现语义冲突-----类 Latex 格式书写的数学公式下划线`_`表示下标，有特殊的含义，如果被强制转换为`<em>`标签，那么 MathJax 引擎在渲染数学公式的时候就会出错。类似的语义冲突的符号还包括`*`, `{`, `}`, `\\`等。但是！！
+> 网上一大堆说会出现语义冲突-----类 Latex 格式书写的数学公式下划线`_`表示下标，有特殊的含义，如果被强制转换为`<em>`标签，那么 MathJax 引擎在渲染数学公式的时候就会出错。类似的语义冲突的符号还包括`*`, `{`, `}`, `\\`等。但是！！
 
 {%note danger%}
 
-在我试验下没有出现此类问题，只要在主题中打开，md中申明mathjax: true就好了，可能在我使用的`next6.7`中解决了冲突。比如以下的公式能出来！
+在我试验下没有出现此类问题，只要在主题中打开，md 中申明 mathjax: true 就好了，可能在我使用的`next6.7`中解决了冲突。比如以下的公式能出来！
 
 {%endnote%}
 
@@ -218,13 +217,9 @@ mathjax: true
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
 ```
 
-
-
 $$
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
 $$
-
-
 
 ```latex
 $$
@@ -236,7 +231,6 @@ P = \frac
 \right]^{1/2} }
 $$
 ```
-
 
 $$
 P = \frac
