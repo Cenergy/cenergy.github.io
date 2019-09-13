@@ -2,7 +2,8 @@
 title: VSCode中python代码输出中文乱码解决方法
 abbrlink: 87ed0839
 date: 2019-09-12 10:10:35
-tags: python
+tags: [python,vscode]
+categories: 技术
 ---
 
 ## 在 vscode 中编写 python 代码，输出中文时，控制台输出为乱码解决方法：
@@ -26,5 +27,7 @@ tags: python
 "python": "set PYTHONIOENCODING=utf8 && python -u"
 }
 ```
-
+<div class="note default">
 https://mp.weixin.qq.com/s/QIJ-QHkxZUyKyQAPG49vPg
+</div>
+

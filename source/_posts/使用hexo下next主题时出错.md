@@ -1,9 +1,12 @@
 ---
 title: 使用hexo下next主题时出错
-tags: 日常
 abbrlink: 326cb881
 date: 2019-09-09 09:58:21
 mathjax: true
+tags:
+  - Hexo
+  - NexT
+categories: 技术
 ---
 
 {% note danger %}
@@ -19,7 +22,5 @@ issue：https://github.com/rozbo/hexo-abbrlink/issues/19
 解决方法：https://github.com/foreveryang321/hexo-asset-image
 
 {% endnote %}
-
-![1568105179054](使用hexo下next主题时出错/1568105179054.png)
 
 ![](使用hexo下next主题时出错/QQ%E5%9B%BE%E7%89%8720190911114226.png)

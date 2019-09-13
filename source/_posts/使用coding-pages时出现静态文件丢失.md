@@ -3,6 +3,9 @@ title: 使用coding-pages时出现静态文件丢失
 abbrlink: 372cd070
 date: 2019-09-05 09:32:57
 tags:
+  - Hexo
+  - NexT
+categories: 技术
 ---
 
 ![](使用coding-pages时出现静态文件丢失/1567646753123.png)

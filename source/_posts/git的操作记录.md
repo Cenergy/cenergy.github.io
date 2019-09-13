@@ -1,8 +1,9 @@
 ---
 title: git的操作记录
-tags: git
 abbrlink: d5d49586
 date: 2019-09-07 08:41:08
+tags: git
+categories: 技术
 ---
 
 ### 与服务器上的代码产生冲突
@@ -15,6 +16,8 @@ Please, commit your changes or stash them before you can merge.
 {% endnote %}
 
 如果希望保留生产服务器上所做的改动,仅仅并入新配置项, 处理方法如下:
+
+<!--more-->
 
 ```
 git stash
@@ -63,8 +66,53 @@ git reset --hard 2216d4e
 
 现在 feature-2 到 feature-6 全没了，还多了一个 feature-7
 
-{%note danger%}
+{%note info%}
 
 请问 如何把丢失的代码 feature-2 到 feature-6 全部恢复回来，并且 feature-7 的代码也要保留
 
 {%endnote%}
+
+**用git reflog和git cherry-pick就能解决**
+
+在终端里输入：
+
+```bash
+git reflog
+```
+
+然后就会展示出所有你之前git操作，你以前所有的操作都被git记录了下来，如下图：
+
+![1568296363901](git的操作记录/1568296363901.png)
+
+
+
+这时候要记好两个值：4c97ff3和cd52afc，他们分别是feature-7和feature-6的hash码。然后执行回滚，回到feature-6上：
+
+```bash
+git reset --hard cd52afc
+```
+
+现在我们回到了feature-6上，如下图：
+
+![1568296459828](git的操作记录/1568296459828.png)
+
+我们回到了feature-6上，但是feature-7没了，如何加上来呢？
+
+这个时候就用上了git cherry-pick，刚刚我们知道了feature-7的hash码为4c97ff3，操作如下：
+
+```bash
+git cherry-pick 4c97ff3
+```
+
+回车之后，你的feature-7的代码就回来了。
+
+期间可能会有一些冲突，按照提示解决就好。最后的结果如下图：
+
+![](git的操作记录/169d3f52baa26b7e.png)
+
+
+
+feature-1 到 feature-7的代码就合并到了一起，以前的代码也都回来了。
+
+[原文出自前端时光机](https://juejin.im/post/5cbd82165188250a926108bd?utm_source=gold_browser_extension)
+

@@ -165,7 +165,9 @@ robotstxt:
     - /archives/
     - /categories/
     - /tags/
-  sitemap: /sitemap.xml
+  sitemap: 
+    - /sitemap.xml
+    - /baidusitemap.xml
 
 plugin:
   - hexo-generator-feed

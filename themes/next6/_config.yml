@@ -72,7 +72,7 @@ footer:
     color: "#808080"
 
   # If not defined, `author` from Hexo main config will be used.
-  copyright: AIGISSS 爱即是诗版权所有
+  copyright: AIGISSS 爱即是诗
   # -------------------------------------------------------------
   powered:
     # Hexo link (Powered by Hexo).
@@ -114,7 +114,7 @@ creative_commons:
 canonical: true
 
 # Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
-seo: false
+seo: true
 
 # If true, will add site-subtitle to index page, added in main hexo config.
 # subtitle: Subtitle
@@ -672,8 +672,9 @@ rating:
 
 # Show number of visitors to each article.
 # You can visit https://leancloud.cn get AppID and AppKey.
+# 和busuanzi统计一样的，只要开启一个！！！
 leancloud_visitors:
-  enable: true
+  enable: false
   app_id: diTi74ah5rpPDNa6bjS0VjqN-gzGzoHsz
   app_key: nHbjOKICQKYQtsVVJjeHYl0O
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security
@@ -714,7 +715,7 @@ busuanzi_count:
 #tencent_mta:
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO.
-baidu_push: false
+baidu_push: true
 
 # Google Calendar
 # Share your recent schedule to others via calendar page.
