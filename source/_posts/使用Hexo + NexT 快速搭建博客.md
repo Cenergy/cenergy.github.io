@@ -101,7 +101,7 @@ cd <folder>
   }
   ```
 
-- scaffolds：模板文件夹，当您新建文章时，Hexo 会根据 scaffold 来建立文件。
+- scaffolds：模板文件夹，是指在新建的文章文件中默认填充的内容。例如，如果您修改scaffold/post.md中的Front-matter内容，那么每次新建一篇文章时都会包含这个修改。
 
 - source：资源文件夹，存放用户资源的地方。除`_posts`文件夹之外，开头命名为 \_ (下划线)的文件/文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。
 
@@ -160,9 +160,10 @@ INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
 在浏览器地址栏输入`http://localhost:4000/`并访问，你应该会看到如下页面：
 {% asset_img pic2.png %}
 
-{% note success %}
+<div class="note success">
 <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;**恭喜你！你已经完成了博客搭建的主要工作！接下来就是细节的配置了。请耐心阅读以下内容。**
-{% endnote %}
+</div>
+
 
 # 配置
 
@@ -394,6 +395,38 @@ P = \frac
 \right]^{1/2} }
 $$
 
+##  添加自定义菜单
 
+以新建「相册」菜单为例：在博客目录下的 source 文件夹下新建名为 photo 文件夹，然后在 photo 文件夹下新建一个 index.md 文件，然后在该文件填写：
 
+```yaml
 ---
+title: 相册
+date: 2018-04-16 22:14:07
+type: "photo"
+---
+```
+
+然后打开主题配置文件 `_config.yml`，在 menu 中添加：
+
+```yaml
+menu:
+  home: / || home
+  archives: /archives || archive
+  categories: /categories || th
+  tags: /tags || tags
+  #添加「相册」菜单
+  相册: /photo || camera
+```
+
+>这里的「相册」是博客中显示的菜单名称，紧跟的 photo 要和前面 index.md 文件的 type 值一致，|| 后面的菜单的图标，图标名称来自于 FontAwesome icon，若没有配置图标，默认会使用问号图标         
+
+## 修改文章底部的那个带#号的标签
+
+修改模板`/themes/next/layout/_macro/post.swig`，搜索 `rel="tag">#`，将 # 换成`<i class="fa fa-tag"></i>`
+
+# 参考
+
+>1. ***[Hexo+NexT 打造一个炫酷博客](https://juejin.im/post/5bcd2d395188255c3b7dc1db)***
+>2. ***[篇Ⅱ：NexT主题的配置和优化指南](https://juejin.im/post/5a71ab9f518825735300ee6c)***
+
