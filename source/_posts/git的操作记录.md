@@ -3,7 +3,9 @@ title: git的操作记录
 abbrlink: d5d49586
 date: 2019-09-07 08:41:08
 tags: git
-categories: 技术
+categories: 
+  - 编程
+  - 更新中
 ---
 
 ### 与服务器上的代码产生冲突

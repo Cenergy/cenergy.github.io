@@ -3,6 +3,9 @@ title: vue学习与总结
 tags: vue
 abbrlink: 3d0c447
 date: 2019-09-16 09:29:36
+categories: 
+  - 编程
+  - 更新中
 ---
 
 ## 组件切换
