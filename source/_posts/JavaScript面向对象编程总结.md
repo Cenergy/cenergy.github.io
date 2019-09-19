@@ -70,9 +70,10 @@ OOP 就一组相关的变量和函数组成合成一个单元，我们称之为�
 JavaScript中的类并不同于Java或者c#中的类，因为Javascript是动态语言，所以类的本质上是更像是为了配合原型和原型继承所采取的必要的技术。
 
 ```javascript
-const circle={} //创建了一个空对象
+//使用字面量创建对象
+const circle={} 
 //一个Javascript的对象实际上是一组键值对的集合
-//使用创建对象的语法来创建多个对象是有问题的，那就是对象的行为性，就像人一样可以做很多事就叫做行为性。
+//使用字面量语法来创建多个对象是有问题的，那就是对象的行为性，就像人一样可以做很多事就叫做行为性。
 //解决方法就是用工厂函数（factory）或者构造函数（constructor）
 
 //工厂函数
@@ -96,7 +97,16 @@ const circle3=new Circle(2)
 //首先new操作符创建了一个空对象，然后设置this指向这个对象，最后返回这个对象
 ```
 
+补充：
 
+[字面量](https://www.baidu.com/s?wd=字面量&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao)是变量的字符串表示形式。它不是一种值，而是一种变量记法。
+
+```javascript
+const a=1 //1是字面量
+const b='hello world' //hello world是字面量
+const c=[1,2,3] //[1,2,3]是字面量
+const d={"foo":"bar"} //{"foo":"bar"}是字面量
+```
 
 每个对象都有构造函数属性
 
@@ -111,6 +121,27 @@ new Object() //{}
 
 ![1568897883740](JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/1568897883740.png)
 
+<div class="note info"><p>值类型复制值</p><p>对象或者引用类型复制他们的引用</p></div>
+
+```js
+let number=10;
+function increase(number){
+    number++;
+}
+increase(number);
+console.log(number) //10
+
+let object={value:10};
+function increase(object){
+    object.value++;
+}
+increase(object);
+console.log(object) //{value:11}
+```
+
+不知道要访问的对象名称属性，是在运行时产生的，可以使用方括号的语法,或者属性名不符合命名规则时。
+
+抽象意味着我们应该隐藏细节和复杂部分，只显示或者暴露必要的部分
 
 
 
@@ -118,7 +149,4 @@ new Object() //{}
 
 
 
-
-
-
-[next station is](https://www.bilibili.com/video/av35179218/?p=10)
+[next station is](https://www.bilibili.com/video/av35179218/?p=14)
