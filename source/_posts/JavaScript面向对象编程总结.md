@@ -122,7 +122,6 @@ new Object() //{}
 ![1568897883740](JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/1568897883740.png)
 
 <div class="note info"><p>值类型复制值</p><p>对象或者引用类型复制他们的引用</p></div>
-
 ```js
 let number=10;
 function increase(number){
@@ -143,10 +142,70 @@ console.log(object) //{value:11}
 
 抽象意味着我们应该隐藏细节和复杂部分，只显示或者暴露必要的部分
 
+隐藏意味着私有，定义私有的几种方法：
+
+- 将成员变量变成本地变量，将成员方法变成本地函数。
+
+  ```js
+  this.defaultLocaltion={x:0,y:1} // ====> let defaultLocaltion={x:0,y:1}
+  Object.defineProperty(this,'defaultLocaltion',{
+      get(){
+          return defaultLocaltion
+      },
+      set(value){
+          defaultLocaltion=value
+      }
+  })
+  ```
+
+
+Javascript中没有类，只有对象，那只有对象的时候如何引入继承？答案是原型。
+
+原型可以理解为一个对象的父母，原型就是一般的对象。
+
+```javascript
+const person = { name: 'hello' };
+Object.defineProperty(person, 'name', {
+  writable: false,
+  enumerable: true,
+  configurable: false,
+});
+delete person.name;
+console.log(person);  // { name: 'hello' }
+
+```
+
+获得对象原型的方法是调用Object对象的getPrototypeOf方法
+
+```js
+function Circle(radius){
+	this.radius=radius
+}
+const circle=new Circle(1)
+Circle.prototype  //这是构造函数创建的对象的父母真身
+circle.__proto__===Circle.prototype  // true
+```
+
+Object.keys只返回实例的成员
+
+for-in循环返回所有的成员，对象实例本身的和它的原型的
+
+![1568956155416](JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/1568956155416.png)
 
 
 
+![1568982071111](JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/1568982071111.png)
+
+在Javascript中，有个函数可以从给定的原型创建对象，就是Object.create(第一个参数是用作创建的原型)
 
 
 
-[next station is](https://www.bilibili.com/video/av35179218/?p=14)
+Javascript里每个对象都有一个构造函数属性，能返回用以创建这个对象的构造函数
+
+避免创建层级式继承关系，因为这十分脆弱。如果要用继承特性，最好维持在一级。好的组合胜过继承。
+
+![1568984473440](JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/1568984473440.png)
+
+![1568984534425](JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/1568984534425.png)
+
+[next station is](https://www.bilibili.com/video/av35179218/?p=35)
