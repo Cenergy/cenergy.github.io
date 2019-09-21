@@ -208,4 +208,43 @@ Javascript里每个对象都有一个构造函数属性，能返回用以创建�
 
 ![1568984534425](JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/1568984534425.png)
 
-[next station is](https://www.bilibili.com/video/av35179218/?p=35)
+<div class="note info">Object.assign()可以用这个方法从一个对象拷贝所有成员到另外一个对象</div>
+
+```javascript
+      const canEat = {
+        eat: function() {
+          console.log("eating");
+        }
+      };
+      const canWalk = {
+        walk: function() {
+          console.log("eating");
+        }
+      };
+      const canSwin = {
+        swin: function() {
+          console.log("swining");
+        }
+      };
+      //   const person = Object.assign({}, canEat, canWalk);
+		// 空对象实际上变成了2个对象的组合
+      //   console.log(person);
+      function mixins(target, ...sources) {
+        Object.assign(target.prototype, ...sources);
+      }
+      //   function Person() {}
+      //   Object.assign(Person.prototype, canEat, canWalk);
+      //   console.log(new Person());
+      function Dog() {}
+      mixins(Dog, canEat, canWalk);
+      console.log(new Dog());
+      function GoldFish() {}
+      mixins(GoldFish, canEat, canSwin);
+      console.log(new GoldFish());
+```
+
+## ES6
+
+
+
+[next station is](https://www.bilibili.com/video/av35179218/?p=40)
