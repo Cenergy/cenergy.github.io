@@ -209,7 +209,6 @@ Javascript里每个对象都有一个构造函数属性，能返回用以创建�
 ![1568984534425](JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/1568984534425.png)
 
 <div class="note info">Object.assign()可以用这个方法从一个对象拷贝所有成员到另外一个对象</div>
-
 ```javascript
       const canEat = {
         eat: function() {
@@ -245,6 +244,36 @@ Javascript里每个对象都有一个构造函数属性，能返回用以创建�
 
 ## ES6
 
+函数声明 `funciton sayHello(){}` 结尾不需要加分号，函数声明是置顶的。
+
+函数表达式`const sayGoodbye=function(){}` 结尾需要加分号，不会被置顶。
+
+不同于函数，类声明和类表达式都不会被置顶
+
+实例方法和静态方法
+
+```js
+class Circle{
+    constructor(radius){
+        this.radius
+        =radius
+    }
+    // Instance Method
+    draw(){
+
+    }
+    // Static Mthod
+    static parse(str){
+        const {radius}=JSON.parse(str)
+        return new Circle(radius)
+    }
+}
+const circle=Circle.parse('{"radius":1}')
+console.log("Go: circle", circle) // Go: circle Circle { radius: 1 }
+```
+
+所以我们用静态方法的方式创建不属于具体实例的工具函数
 
 
-[next station is](https://www.bilibili.com/video/av35179218/?p=40)
+
+[next station is](https://www.bilibili.com/video/av35179218/?p=43)
