@@ -8,11 +8,6 @@ categories:
   - 更新中
 ---
 
-## 组件切换
-
-vue 提供了 component，来展示对应的名称组件
-component 是一个占位符,:is 属性，可以用来指定展示的组件的名称
-
 ## 插值表达式
 
 <!--more-->
@@ -39,15 +34,223 @@ component 是一个占位符,:is 属性，可以用来指定展示的组件的�
 
 ## 事件修饰符
 
-- .stop
-- .prevent
-- .capture
-- .self
-- .once
+- .stop       阻止冒泡
+- .prevent    阻止默认事件
+- .capture    添加事件侦听器时使用事件捕获模式
+- .self       只当事件在该元素本身（比如不是子元素）触发时触发回调
+- .once       事件只触发一次
 
-vue 中绑定样式两种方式 v-bind:class 和 v-bind:style
+## 在Vue中使用样式
 
-## 定义指令
+
+
+### 使用class样式
+
+1. 数组
+
+```
+<h1 :class="['red', 'thin']">这是一个邪恶的H1</h1>
+```
+
+2. 数组中使用三元表达式
+
+```
+<h1 :class="['red', 'thin', isactive?'active':'']">这是一个邪恶的H1</h1>
+```
+
+3. 数组中嵌套对象
+
+```
+<h1 :class="['red', 'thin', {'active': isactive}]">这是一个邪恶的H1</h1>
+```
+
+4. 直接使用对象
+
+```
+<h1 :class="{red:true, italic:true, active:true, thin:true}">这是一个邪恶的H1</h1>
+```
+
+
+
+### 使用内联样式
+
+1. 直接在元素上通过 `:style` 的形式，书写样式对象
+
+```
+<h1 :style="{color: 'red', 'font-size': '40px'}">这是一个善良的H1</h1>
+```
+
+2. 将样式对象，定义到 `data` 中，并直接引用到 `:style` 中
+
+- 在data上定义样式：
+
+```
+data: {
+        h1StyleObj: { color: 'red', 'font-size': '40px', 'font-weight': '200' }
+}
+```
+
+- 在元素中，通过属性绑定的形式，将样式对象应用到元素中：
+
+```
+<h1 :style="h1StyleObj">这是一个善良的H1</h1>
+```
+
+3. 在 `:style` 中通过数组，引用多个 `data` 上的样式对象
+
+- 在data上定义样式：
+
+```
+data: {
+        h1StyleObj: { color: 'red', 'font-size': '40px', 'font-weight': '200' },
+        h1StyleObj2: { fontStyle: 'italic' }
+}
+```
+
+- 在元素中，通过属性绑定的形式，将样式对象应用到元素中：
+
+```
+<h1 :style="[h1StyleObj, h1StyleObj2]">这是一个善良的H1</h1>
+```
+
+## Vue指令之`v-if`和`v-show`
+
+> 一般来说，v-if 有更高的切换消耗而 v-show 有更高的初始渲染消耗。因此，如果需要频繁切换 v-show 较好，如果在运行时条件不大可能改变 v-if 较好。
+
+## 过滤器
+
+概念：Vue.js 允许你自定义过滤器，**可被用作一些常见的文本格式化**。过滤器可以用在两个地方：**mustache 插值和 v-bind 表达式**。过滤器应该被添加在 JavaScript 表达式的尾部，由“管道”符指示；
+
+### 私有过滤器
+
+1. HTML元素：
+
+```
+<td>{{item.ctime | dataFormat('yyyy-mm-dd')}}</td>
+
+```
+
+2. 私有 `filters` 定义方式：
+
+```
+filters: { // 私有局部过滤器，只能在 当前 VM 对象所控制的 View 区域进行使用
+
+    dataFormat(input, pattern = "") { // 在参数列表中 通过 pattern="" 来指定形参默认值，防止报错
+
+      var dt = new Date(input);
+
+      // 获取年月日
+
+      var y = dt.getFullYear();
+
+      var m = (dt.getMonth() + 1).toString().padStart(2, '0');
+
+      var d = dt.getDate().toString().padStart(2, '0');
+
+
+
+      // 如果 传递进来的字符串类型，转为小写之后，等于 yyyy-mm-dd，那么就返回 年-月-日
+
+      // 否则，就返回  年-月-日 时：分：秒
+
+      if (pattern.toLowerCase() === 'yyyy-mm-dd') {
+
+        return `${y}-${m}-${d}`;
+
+      } else {
+
+        // 获取时分秒
+
+        var hh = dt.getHours().toString().padStart(2, '0');
+
+        var mm = dt.getMinutes().toString().padStart(2, '0');
+
+        var ss = dt.getSeconds().toString().padStart(2, '0');
+
+
+
+        return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+
+      }
+
+    }
+
+  }
+
+```
+
+
+
+> 使用ES6中的字符串新方法 String.prototype.padStart(maxLength, fillString='') 或 String.prototype.padEnd(maxLength, fillString='')来填充字符串；
+
+### 全局过滤器
+
+```
+// 定义一个全局过滤器
+
+Vue.filter('dataFormat', function (input, pattern = '') {
+
+  var dt = new Date(input);
+
+  // 获取年月日
+
+  var y = dt.getFullYear();
+
+  var m = (dt.getMonth() + 1).toString().padStart(2, '0');
+
+  var d = dt.getDate().toString().padStart(2, '0');
+
+
+
+  // 如果 传递进来的字符串类型，转为小写之后，等于 yyyy-mm-dd，那么就返回 年-月-日
+
+  // 否则，就返回  年-月-日 时：分：秒
+
+  if (pattern.toLowerCase() === 'yyyy-mm-dd') {
+
+    return `${y}-${m}-${d}`;
+
+  } else {
+
+    // 获取时分秒
+
+    var hh = dt.getHours().toString().padStart(2, '0');
+
+    var mm = dt.getMinutes().toString().padStart(2, '0');
+
+    var ss = dt.getSeconds().toString().padStart(2, '0');
+
+
+
+    return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+
+  }
+
+});
+
+```
+
+
+
+> 注意：当有局部和全局两个名称相同的过滤器时候，会以就近原则进行调用，即：局部过滤器优先于全局过滤器被调用！
+
+## 键盘修饰符以及自定义键盘修饰符
+
+1. 通过`Vue.config.keyCodes.名称 = 按键值`来自定义案件修饰符的别名：
+
+```js
+Vue.config.keyCodes.f2 = 113;
+```
+
+2. 使用自定义的按键修饰符：
+
+```
+<input type="text" v-model="name" @keyup.f2="add">
+```
+
+
+
+## 自定义指令
 
 - 使用 Vue.directive()定义全局的指令，比如 v-focus
 
@@ -74,6 +277,7 @@ vue 中绑定样式两种方式 v-bind:class 和 v-bind:style
       }
   }
   ```
+  
 - 私有指令的定义
 
   ```js
@@ -85,7 +289,64 @@ vue 中绑定样式两种方式 v-bind:class 和 v-bind:style
     }
   ```
 
+  2. 自定义指令的使用方式：
   
+  ```
+  <input type="text" v-model="searchName" v-focus v-color="'red'" v-font-weight="900">
+  ```
+
+###  实现筛选的方式显示过滤-排序结果：
+
+- 筛选框绑定到 VM 实例中的 `searchName` 属性：
+
+```
+<hr> 输入筛选名称：
+
+<input type="text" v-model="searchName">
+
+```
+
+- 在使用 `v-for` 指令循环每一行数据的时候，不再直接 `item in list`，而是 `in` 一个 过滤的methods 方法，同时，把过滤条件`searchName`传递进去：
+
+```
+<tbody>
+
+      <tr v-for="item in search(searchName)">
+
+        <td>{{item.id}}</td>
+
+        <td>{{item.name}}</td>
+
+        <td>{{item.ctime}}</td>
+
+        <td>
+
+          <a href="#" @click.prevent="del(item.id)">删除</a>
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+```
+
+- `search` 过滤方法中，使用 数组的 `filter` 方法进行过滤：
+
+```
+search(name) {
+
+  return this.list.filter(x => {
+
+    return x.name.indexOf(name) != -1;
+
+  });
+
+}
+
+```
+
+
 
 ## JSONP的实现原理
 
@@ -93,6 +354,377 @@ vue 中绑定样式两种方式 v-bind:class 和 v-bind:style
 - 可以通过动态创建script标签的形式，把script标签的src属性指向数据接口的地址。因为script标签不存在跨域限制，这种数据获取方式称之为JSONP
 - 具体实现过程
   - 先在客户端定义一个回调方法，预定义对数据的操作；
+  
   - 再把这个回调方法的名称通过URL传参的形式提交到服务器的数据接口；
+  
   - 服务器数据接口组织好要发送给客户端的数据，再拿客户端传递过来的回调方法名称拼接出一个调用这个方法的字符串，发送给客户端解析执行；
+  
   - 客户端拿到服务器的返回的字符串之后，当作script脚本执行。
+  
+  - Node.js 实现一个JSONP的请求例子
+  
+    ```
+    const http = require('http');
+        // 导入解析 URL 地址的核心模块
+        const urlModule = require('url');
+    
+        const server = http.createServer();
+        // 监听 服务器的 request 请求事件，处理每个请求
+        server.on('request', (req, res) => {
+          const url = req.url;
+    
+          // 解析客户端请求的URL地址
+          var info = urlModule.parse(url, true);
+    
+          // 如果请求的 URL 地址是 /getjsonp ，则表示要获取JSONP类型的数据
+          if (info.pathname === '/getjsonp') {
+            // 获取客户端指定的回调函数的名称
+            var cbName = info.query.callback;
+            // 手动拼接要返回给客户端的数据对象
+            var data = {
+              name: 'zs',
+              age: 22,
+              gender: '男',
+              hobby: ['吃饭', '睡觉', '运动']
+            }
+            // 拼接出一个方法的调用，在调用这个方法的时候，把要发送给客户端的数据，序列化为字符串，作为参数传递给这个调用的方法：
+            var result = `${cbName}(${JSON.stringify(data)})`;
+            // 将拼接好的方法的调用，返回给客户端去解析执行
+            res.end(result);
+          } else {
+            res.end('404');
+          }
+        });
+    
+        server.listen(3000, () => {
+          console.log('server running at =http://127.0.0.1:3000');
+        });
+    ```
+
+##  [Vue中的动画](https://cn.vuejs.org/v2/guide/transitions.html)
+
+### 使用过渡类名
+
+1. HTML结构：
+
+```
+<div id="app">
+    <input type="button" value="动起来" @click="myAnimate">
+    <!-- 使用 transition 将需要过渡的元素包裹起来 -->
+    <transition name="fade">
+      <div v-show="isshow">动画哦</div>
+    </transition>
+  </div>
+```
+
+2. VM 实例：
+
+```
+// 创建 Vue 实例，得到 ViewModel
+var vm = new Vue({
+  el: '#app',
+  data: {
+    isshow: false
+  },
+  methods: {
+    myAnimate() {
+      this.isshow = !this.isshow;
+    }
+  }
+});
+
+```
+
+3. 定义两组类样式：
+
+```
+/* 定义进入和离开时候的过渡状态 */
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: all 0.2s ease;
+      position: absolute;
+    }
+
+    /* 定义进入过渡的开始状态 和 离开过渡的结束状态 */
+    .fade-enter,
+    .fade-leave-to {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+```
+
+### [使用第三方 CSS 动画库](https://cn.vuejs.org/v2/guide/transitions.html#自定义过渡类名)
+
+1. 导入动画类库：
+
+```
+<link rel="stylesheet" type="text/css" href="./lib/animate.css">
+```
+
+2. 定义 transition 及属性：
+
+```
+<transition
+	enter-active-class="fadeInRight"
+    leave-active-class="fadeOutRight"
+    :duration="{ enter: 500, leave: 800 }">
+  	<div class="animated" v-show="isshow">动画哦</div>
+</transition>
+```
+
+### 使用动画钩子函数
+
+1. 定义 transition 组件以及三个钩子函数：
+
+```
+<div id="app">
+    <input type="button" value="切换动画" @click="isshow = !isshow">
+    <transition
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @after-enter="afterEnter">
+      <div v-if="isshow" class="show">OK</div>
+    </transition>
+  </div>
+```
+
+2. 定义三个 methods 钩子方法：
+
+```
+methods: {
+        beforeEnter(el) { // 动画进入之前的回调
+          el.style.transform = 'translateX(500px)';
+        },
+        enter(el, done) { // 动画进入完成时候的回调
+          el.offsetWidth;
+          el.style.transform = 'translateX(0px)';
+          done();
+        },
+        afterEnter(el) { // 动画进入完成之后的回调
+          this.isshow = !this.isshow;
+        }
+      }
+```
+
+3. 定义动画过渡时长和样式：
+
+```
+.show{
+      transition: all 0.4s ease;
+    }
+```
+
+### [v-for 的列表过渡](https://cn.vuejs.org/v2/guide/transitions.html#列表的进入和离开过渡)
+
+1. 定义过渡样式：
+
+```
+<style>
+    .list-enter,
+    .list-leave-to {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .list-enter-active,
+    .list-leave-active {
+      transition: all 0.3s ease;
+    }
+</style>
+```
+
+2. 定义DOM结构，其中，需要使用 transition-group 组件把v-for循环的列表包裹起来：
+
+```
+  <div id="app">
+    <input type="text" v-model="txt" @keyup.enter="add">
+
+    <transition-group tag="ul" name="list">
+      <li v-for="(item, i) in list" :key="i">{{item}}</li>
+    </transition-group>
+  </div>
+```
+
+3. 定义 VM中的结构：
+
+```
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        txt: '',
+        list: [1, 2, 3, 4]
+      },
+      methods: {
+        add() {
+          this.list.push(this.txt);
+          this.txt = '';
+        }
+      }
+    });
+```
+
+### 列表的排序过渡
+
+`<transition-group>` 组件还有一个特殊之处。不仅可以进入和离开动画，**还可以改变定位**。要使用这个新功能只需了解新增的 `v-move` 特性，**它会在元素的改变定位的过程中应用**。
+
+- `v-move` 和 `v-leave-active` 结合使用，能够让列表的过渡更加平缓柔和：
+
+```
+.v-move{
+  transition: all 0.8s ease;
+}
+.v-leave-active{
+  position: absolute;
+}
+```
+
+## 定义Vue组件
+
+什么是组件： 组件的出现，就是为了拆分Vue实例的代码量的，能够让我们以不同的组件，来划分不同的功能模块，将来我们需要什么样的功能，就可以去调用对应的组件即可；
+组件化和模块化的不同：
+
+- 模块化： 是从代码逻辑的角度进行划分的；方便代码分层开发，保证每个功能模块的职能单一；
+- 组件化： 是从UI界面的角度进行划分的；前端的组件化，方便UI组件的重用；
+
+### 全局组件定义的三种方式
+
+1. 使用 Vue.extend 配合 Vue.component 方法：
+
+```
+var login = Vue.extend({
+      template: '<h1>登录</h1>'
+    });
+    Vue.component('login', login);
+```
+
+2. 直接使用 Vue.component 方法：
+
+```
+Vue.component('register', {
+      template: '<h1>注册</h1>'
+    });
+```
+
+3. 将模板字符串，定义到script标签种：
+
+```
+<script id="tmpl" type="x-template">
+      <div><a href="#">登录</a> | <a href="#">注册</a></div>
+    </script>
+```
+
+同时，需要使用 Vue.component 来定义组件：
+
+```
+Vue.component('account', {
+      template: '#tmpl'
+    });
+```
+
+> 注意： 组件中的DOM结构，有且只能有唯一的根元素（Root Element）来进行包裹！
+
+### 组件中展示数据和响应事件
+
+1. 在组件中，`data`需要被定义为一个方法，例如：
+
+```
+Vue.component('account', {
+      template: '#tmpl',
+      data() {
+        return {
+          msg: '大家好！'
+        }
+      },
+      methods:{
+        login(){
+          alert('点击了登录按钮');
+        }
+      }
+    });
+```
+
+2. 在子组件中，如果将模板字符串，定义到了script标签中，那么，要访问子组件身上的`data`属性中的值，需要使用`this`来访问；
+
+## 组件切换
+
+vue 提供了 component，来展示对应的名称组件
+component 是一个占位符,:is 属性，可以用来指定展示的组件的名称
+
+## 父组件向子组件传值
+
+1. 组件实例定义方式，注意：一定要使用`props`属性来定义父组件传递过来的数据
+
+```
+<script>
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '这是父组件中的消息'
+      },
+      components: {
+        son: {
+          template: '<h1>这是子组件 --- {{finfo}}</h1>',
+          props: ['finfo']
+        }
+      }
+    });
+  </script>
+```
+
+2. 使用`v-bind`或简化指令，将数据传递到子组件中：
+
+```
+<div id="app">
+    <son :finfo="msg"></son>
+  </div>
+```
+
+## 子组件向父组件传值
+
+1. 原理：父组件将方法的引用，传递到子组件内部，子组件在内部调用父组件传递过来的方法，同时把要发送给父组件的数据，在调用方法的时候当作参数传递进去；
+2. 父组件将方法的引用传递给子组件，其中，`getMsg`是父组件中`methods`中定义的方法名称，`func`是子组件调用传递过来方法时候的方法名称
+
+```
+<son @func="getMsg"></son>
+```
+
+3. 子组件内部通过`this.$emit('方法名', 要传递的数据)`方式，来调用父组件中的方法，同时把数据传递给父组件使用
+
+```
+<div id="app">
+    <!-- 引用父组件 -->
+    <son @func="getMsg"></son>
+
+    <!-- 组件模板定义 -->
+    <script type="x-template" id="son">
+      <div>
+        <input type="button" value="向父组件传值" @click="sendMsg" />
+      </div>
+    </script>
+  </div>
+
+  <script>
+    // 子组件的定义方式
+    Vue.component('son', {
+      template: '#son', // 组件模板Id
+      methods: {
+        sendMsg() { // 按钮的点击事件
+          this.$emit('func', 'OK'); // 调用父组件传递过来的方法，同时把数据传递出去
+        }
+      }
+    });
+
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {},
+      methods: {
+        getMsg(val){ // 子组件中，通过 this.$emit() 实际调用的方法，在此进行定义
+          alert(val);
+        }
+      }
+    });
+  </script>
+```
