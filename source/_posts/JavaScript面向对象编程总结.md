@@ -358,7 +358,7 @@ ES6
 
 > export && import
 >
-> <script type="module" src="../"
+> <script type="module" src="../"></script>
 
 在模块化之前，要记住一个首要原则，高度关联的东西应该放在一起。就好比在厨房放置了杯子盘子勺子等餐具，不应该把衣服存放在厨房，这就是高度关联。这就是编程中说的 Cohesion(内聚)。
 

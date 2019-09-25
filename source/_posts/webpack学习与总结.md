@@ -12,6 +12,46 @@ tags: webpack
 ## 初识Webpack
 
 ## Webpack核心概念
+### plugin
+
+plugin可以在webpack运行到某一时刻的时候，帮你做一些事情。
+
+htmlWepackPluginnn会在打包结束后，自动生成一个html文件，并把打包的生成的js自动引入到这个html文件中。
+
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //通过 npm 安装
+const webpack = require('webpack'); //访问内置的插件
+const path = require('path');
+
+const config = {
+    mode:"production",
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: 'file-loader'
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({template: './src/index.html'})
+  ]
+};
+
+module.exports = config;
+```
+
+
+
+### output
+
+publicPath:"http://www..."
+
 
 ## Webpack进阶
 
