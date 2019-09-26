@@ -218,6 +218,63 @@ npm i -D webpack@beta
   }
   ```
 
+- 可以使用`npx webpack`
+
+  Node 自带 npm 模块，所以可以直接使用 npx 命令。万一不能用，就要手动安装一下。
+
+  ```bash
+  npm install -g npx
+  ```
+
+  npx 想要解决的主要问题，就是调用项目内部安装的模块。比如，项目内部安装了 webpack 而且全局没有安装 webpack。
+
+  ```bash
+  npm install -D webpack
+  ```
+
+  一般来说，调用 webpack，只能在项目脚本和 package.json 的[`scripts`](http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html)字段里面， 如果想在命令行下调用，必须像下面这样。
+
+  ```bash
+  # 项目的根目录下执行
+  cd node_modules\.bin
+  webpack --version   # 输出 4.41.0
+  ```
+
+  npx 就是想解决这个问题，让项目内部安装的模块用起来更方便，只要像下面这样调用就行了。
+
+  ```bash
+  # 项目的根目录下执行
+  npx webpack --version
+  ```
+
+  npx 的原理很简单，就是运行的时候，会到`node_modules/.bin`路径和环境变量`$PATH`里面，检查命令是否存在。
+
+  由于 npx 会检查环境变量`$PATH`，所以系统命令也可以调用。
+
+  除了调用项目内部模块，npx 还能避免全局安装的模块。比如，`create-react-app`这个模块是全局安装，npx 可以运行它，而且不进行全局安装。
+
+  > ```bash
+  > $ npx create-react-app my-react-app
+  > ```
+
+  上面代码运行时，npx 将`create-react-app`下载到一个临时目录，使用以后再删除。所以，以后再次执行上面的命令，会重新下载`create-react-app`。
+
+  下载全局模块时，npx 允许指定版本。
+
+  > ```bash
+  > $ npx uglify-js@3.1.0 main.js -o ./dist/main.js
+  > ```
+
+  上面代码指定使用 3.1.0 版本的`uglify-js`压缩脚本。
+
+  注意，只要 npx 后面的模块无法在本地发现，就会下载同名模块。比如，本地没有安装`http-server`模块，下面的命令会自动下载该模块，在当前目录启动一个 Web 服务。
+
+  > ```bash
+  > $ npx http-server
+  > ```
+
+  > 参考：[npx 使用教程](http://www.ruanyifeng.com/blog/2019/02/npx.html)
+
 ### 安装 Webpack 到全局
 
 安装到全局后你可以在任何地方共用一个 Webpack 可执行文件，而不用各个项目重复安装，安装方式如下：
@@ -227,7 +284,6 @@ npm i -g webpack
 ```
 
 <div class="note danger">虽然介绍了以上两种安装方式，但是我们推荐安装到本项目，原因是可防止不同项目依赖不同版本的 Webpack 而导致冲突。</div>
-
 ### 使用 Webpack
 
 #### 默认配置
@@ -344,69 +400,56 @@ const config = {
 module.exports = config;
 ```
 
-### output
+#### 使用 DevServer
 
-publicPath:"http://www..."
+DevServer 会启动一个 HTTP 服务器用于服务网页请求，同时会帮助启动 Webpack ，并接收 Webpack 发出的文件更变信号，通过 WebSocket 协议自动刷新网页做到实时预览。
 
-全局安装时可以在命令行中使用 webpack。
-局部安装时可以使用`npx webpack`
-
-### npx 的使用
-
-Node 自带 npm 模块，所以可以直接使用 npx 命令。万一不能用，就要手动安装一下。
+首先需要安装 DevServer：
 
 ```bash
-npm install -g npx
+npm i -D webpack-dev-server
 ```
 
-npx 想要解决的主要问题，就是调用项目内部安装的模块。比如，项目内部安装了 webpack 而且全局没有安装 webpack。
+安装成功后执行 `webpack-dev-server` 命令， DevServer 就启动了，这时你会看到控制台有一串日志输出：
 
-```bash
-npm install -D webpack
+```
+Project is running at http://localhost:8080/
+webpack output is served from /
 ```
 
-一般来说，调用 webpack，只能在项目脚本和 package.json 的[`scripts`](http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html)字段里面， 如果想在命令行下调用，必须像下面这样。
+这意味着 DevServer 启动的 HTTP 服务器监听在 `http://localhost:8080/` ，DevServer 启动后会一直驻留在后台保持运行，访问这个网址你就能获取项目根目录下的 `index.html`。 用浏览器打开这个地址你会发现页面空白错误原因是 `./dist/bundle.js` 加载404了。 同时你会发现并没有文件输出到 `dist` 目录，原因是 DevServer 会把 Webpack 构建出的文件保存在内存中，在要访问输出的文件时，必须通过 HTTP 服务访问。 由于 DevServer 不会理会 `webpack.config.js` 里配置的 `output.path` 属性，所以要获取 `bundle.js`的正确 URL 是 `http://localhost:8080/bundle.js`，对应的 `index.html` 应该修改为：
 
-```bash
-# 项目的根目录下执行
-cd node_modules\.bin
-webpack --version   # 输出 4.41.0
+```html
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div id="app"></div>
+<!--导入 DevServer 输出的 JavaScript 文件-->
+<script src="bundle.js"></script>
+</body>
+</html>
 ```
 
-npx 就是想解决这个问题，让项目内部安装的模块用起来更方便，只要像下面这样调用就行了。
+Webpack 可以在启动 Webpack 时通过 `webpack --watch` 来开启监听模式，实时预览。Webpack 支持生成 Source Map，只需在启动时带上 `--devtool source-map` 参数。 加上参数重启 DevServer 后刷新页面，再打开 Chrome 浏览器的开发者工具，就可在 Sources 栏中看到可调试的源代码了。
 
-```bash
-# 项目的根目录下执行
-npx webpack --version
-```
+DevServer 还有一种被称作模块热替换的刷新技术。 模块热替换能做到在不重新加载整个网页的情况下，通过将被更新过的模块替换老的模块，再重新执行一次来实现实时预览。 模块热替换相对于默认的刷新机制能提供更快的响应和更好的开发体验。 模块热替换默认是关闭的，要开启模块热替换，你只需在启动 DevServer 时带上 `--hot` 参数，重启 DevServer 后再去更新文件就能体验到模块热替换的神奇了。
 
-npx 的原理很简单，就是运行的时候，会到`node_modules/.bin`路径和环境变量`$PATH`里面，检查命令是否存在。
+### 核心概念
 
-由于 npx 会检查环境变量`$PATH`，所以系统命令也可以调用。
+ Webpack 有以下几个核心概念。
 
-除了调用项目内部模块，npx 还能避免全局安装的模块。比如，`create-react-app`这个模块是全局安装，npx 可以运行它，而且不进行全局安装。
+- **Entry**：入口，Webpack 执行构建的第一步将从 Entry 开始，可抽象成输入。
+- **Module**：模块，在 Webpack 里一切皆模块，一个模块对应着一个文件。Webpack 会从配置的 Entry 开始递归找出所有依赖的模块。
+- **Chunk**：代码块，一个 Chunk 由多个模块组合而成，用于代码合并与分割。
+- **Loader**：模块转换器，用于把模块原内容按照需求转换成新内容。
+- **Plugin**：扩展插件，在 Webpack 构建流程中的特定时机注入扩展逻辑来改变构建结果或做你想要的事情。
+- **Output**：输出结果，在 Webpack 经过一系列处理并得出最终想要的代码后输出结果。
 
-> ```bash
-> $ npx create-react-app my-react-app
-> ```
+Webpack 启动后会从 Entry 里配置的 Module 开始递归解析 Entry 依赖的所有 Module。 每找到一个 Module， 就会根据配置的 Loader 去找出对应的转换规则，对 Module 进行转换后，再解析出当前 Module 依赖的 Module。 这些模块会以 Entry 为单位进行分组，一个 Entry 和其所有依赖的 Module 被分到一个组也就是一个 Chunk。最后 Webpack 会把所有 Chunk 转换成文件输出。 在整个流程中 Webpack 会在恰当的时机执行 Plugin 里定义的逻辑。
 
-上面代码运行时，npx 将`create-react-app`下载到一个临时目录，使用以后再删除。所以，以后再次执行上面的命令，会重新下载`create-react-app`。
-
-下载全局模块时，npx 允许指定版本。
-
-> ```bash
-> $ npx uglify-js@3.1.0 main.js -o ./dist/main.js
-> ```
-
-上面代码指定使用 3.1.0 版本的`uglify-js`压缩脚本。
-
-注意，只要 npx 后面的模块无法在本地发现，就会下载同名模块。比如，本地没有安装`http-server`模块，下面的命令会自动下载该模块，在当前目录启动一个 Web 服务。
-
-> ```bash
-> $ npx http-server
-> ```
-
-> 参考：[npx 使用教程](http://www.ruanyifeng.com/blog/2019/02/npx.html)
+## webpack的配置
 
 ### loader
 
