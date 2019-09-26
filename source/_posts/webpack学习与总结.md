@@ -11,7 +11,45 @@ tags: webpack
 
 ## 初识 Webpack
 
-webpack是模块打包工具
+webpack 是模块打包工具
+
+## Webpack 核心概念
+
+### plugin
+
+plugin 可以在 webpack 运行到某一时刻的时候，帮你做一些事情。
+
+htmlWepackPluginnn 会在打包结束后，自动生成一个 html 文件，并把打包的生成的 js 自动引入到这个 html 文件中。
+
+```js
+const HtmlWebpackPlugin = require("html-webpack-plugin"); //通过 npm 安装
+const webpack = require("webpack"); //访问内置的插件
+const path = require("path");
+
+const config = {
+  mode: "production",
+  entry: "./src/index.js",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist")
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: "file-loader"
+      }
+    ]
+  },
+  plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })]
+};
+
+module.exports = config;
+```
+
+### output
+
+publicPath:"http://www..."
 
 全局安装时可以在命令行中使用 webpack。
 局部安装时可以使用`npx webpack`
@@ -24,7 +62,7 @@ Node 自带 npm 模块，所以可以直接使用 npx 命令。万一不能用�
 npm install -g npx
 ```
 
-npx 想要解决的主要问题，就是调用项目内部安装的模块。比如，项目内部安装了webpack而且全局没有安装webpack。
+npx 想要解决的主要问题，就是调用项目内部安装的模块。比如，项目内部安装了 webpack 而且全局没有安装 webpack。
 
 ```bash
 npm install -D webpack
@@ -75,37 +113,39 @@ npx 的原理很简单，就是运行的时候，会到`node_modules/.bin`路径
 
 ### loader
 
-#### file-loader  
+#### file-loader
 
 就会拷贝到打包文件夹内
 
 ```js
 module.exports = {
-  mode:"development",
-  entry:{
-      main:"./src/index.js"
+  mode: "development",
+  entry: {
+    main: "./src/index.js"
   },
-  module:{
-      rules:[{
-          test:/\.jpg$/,
-          use:{
-              loader:'file-loader',
-              options:{
-                  name:'[name].[ext]'
-              }
+  module: {
+    rules: [
+      {
+        test: /\.jpg$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "[name].[ext]"
           }
-      }]
+        }
+      }
+    ]
   },
-  output:{
-      filename:'main.js',
-      path:path.resolve(__dirname,'dist')
+  output: {
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist")
   }
 };
 ```
 
-#### url-loader  
+#### url-loader
 
-会变成base64，在js文件中直接加载
+会变成 base64，在 js 文件中直接加载
 
 ```js
 const path = require("path");
@@ -137,8 +177,6 @@ module.exports = {
 ```
 
 ### css-loader style-loader
-
-
 
 ## Webpack 核心概念
 
