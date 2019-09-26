@@ -5,17 +5,314 @@ date: 2019-09-24 20:37:14
 tags: webpack
 ---
 
-![1569329464055](webpack%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%80%BB%E7%BB%93/1569329464055.png)
+![](webpack%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%80%BB%E7%BB%93/webpack.png)
 
 <!--more-->
 
 ## 初识 Webpack
 
-webpack 是模块打包工具
+webpack 是模块打包工具，把源代码转换成发布到线上的可执行 JavaScrip、CSS、HTML 代码，包括如下内容。
 
-## Webpack 核心概念
+- 代码转换：TypeScript 编译成 JavaScript、SCSS 编译成 CSS 等。
+- 文件优化：压缩 JavaScript、CSS、HTML 代码，压缩合并图片等。
+- 代码分割：提取多个页面的公共代码、提取首屏不需要执行部分的代码让其异步加载。
+- 模块合并：在采用模块化的项目里会有很多个模块和文件，需要构建功能把模块分类合并成一个文件。
+- 自动刷新：监听本地源代码的变化，自动重新构建、刷新浏览器。
+- 代码校验：在代码被提交到仓库前需要校验代码是否符合规范，以及单元测试是否通过。
+- 自动发布：更新完代码后，自动构建出线上发布代码并传输给发布系统。
 
-### plugin
+构建其实是工程化、自动化思想在前端开发中的体现，把一系列流程用代码去实现，让代码自动化地执行这一系列复杂的流程。 构建给前端开发注入了更大的活力，解放了我们的生产力。
+
+历史上先后出现一系列构建工具，它们各有其优缺点。由于前端工程师很熟悉 JavaScript ，Node.js 又可以胜任所有构建需求，所以大多数构建工具都是用 Node.js 开发的。下面来一一介绍它们。
+
+### Npm Script
+
+[Npm Script](https://docs.npmjs.com/misc/scripts) 是一个任务执行者。Npm 是在安装 Node.js 时附带的包管理器，Npm Script 则是 Npm 内置的一个功能，允许在 `package.json` 文件里面使用 `scripts` 字段定义任务：
+
+```json
+{
+  "scripts": {
+    "dev": "node dev.js",
+    "pub": "node build.js"
+  }
+}
+```
+
+里面的 `scripts` 字段是一个对象，每个属性对应一段 Shell 脚本，以上代码定义了两个任务 `dev` 和 `pub`。 其底层实现原理是通过调用 Shell 去运行脚本命令，例如执行 `npm run pub` 命令等同于执行命令 `node build.js`。
+
+Npm Script的优点是内置，无须安装其他依赖。其缺点是功能太简单，虽然提供了 `pre` 和 `post` 两个钩子，但不能方便地管理多个任务之间的依赖。
+
+### Grunt
+
+[Grunt](https://gruntjs.com/) 和 Npm Script 类似，也是一个任务执行者。Grunt 有大量现成的插件封装了常见的任务，也能管理任务之间的依赖关系，自动化执行依赖的任务，每个任务的具体执行代码和依赖关系写在配置文件 `Gruntfile.js` 里，例如：
+
+```js
+module.exports = function(grunt) {
+  // 所有插件的配置信息
+  grunt.initConfig({
+    // uglify 插件的配置信息
+    uglify: {
+      app_task: {
+        files: {
+          'build/app.min.js': ['lib/index.js', 'lib/test.js']
+        }
+      }
+    },
+    // watch 插件的配置信息
+    watch: {
+      another: {
+          files: ['lib/*.js'],
+      }
+    }
+  });
+
+  // 告诉 grunt 我们将使用这些插件
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+
+  // 告诉grunt当我们在终端中启动 grunt 时需要执行哪些任务
+  grunt.registerTask('dev', ['uglify','watch']);
+};
+```
+
+在项目根目录下执行命令 `grunt dev` 就会启动 JavaScript 文件压缩和自动刷新功能。
+
+Grunt的优点是：
+
+- 灵活，它只负责执行你定义的任务；
+- 大量的可复用插件封装好了常见的构建任务。
+
+Grunt的缺点是集成度不高，要写很多配置后才可以用，无法做到开箱即用。
+
+Grunt 相当于进化版的 Npm Script，它的诞生其实是为了弥补 Npm Script 的不足。
+
+### Gulp
+
+[Gulp](http://gulpjs.com/) 是一个基于流的自动化构建工具。 除了可以管理和执行任务，还支持监听文件、读写文件。Gulp 被设计得非常简单，只通过下面5个方法就可以胜任几乎所有构建场景：
+
+- 通过 `gulp.task` 注册一个任务；
+- 通过 `gulp.run` 执行任务；
+- 通过 `gulp.watch` 监听文件变化；
+- 通过 `gulp.src` 读取文件；
+- 通过 `gulp.dest` 写文件。
+
+Gulp 的最大特点是引入了流的概念，同时提供了一系列常用的插件去处理流，流可以在插件之间传递，大致使用如下：
+
+```js
+// 引入 Gulp
+var gulp = require('gulp'); 
+// 引入插件
+var jshint = require('gulp-jshint');
+var sass = require('gulp-sass');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+
+// 编译 SCSS 任务
+gulp.task('sass', function() {
+  // 读取文件通过管道喂给插件
+  gulp.src('./scss/*.scss')
+    // SCSS 插件把 scss 文件编译成 CSS 文件
+    .pipe(sass())
+    // 输出文件
+    .pipe(gulp.dest('./css'));
+});
+
+// 合并压缩 JS
+gulp.task('scripts', function() {
+  gulp.src('./js/*.js')
+    .pipe(concat('all.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('./dist'));
+});
+
+// 监听文件变化
+gulp.task('watch', function(){
+  // 当 scss 文件被编辑时执行 SCSS 任务
+  gulp.watch('./scss/*.scss', ['sass']);
+  gulp.watch('./js/*.js', ['scripts']);    
+});
+```
+
+Gulp 的优点是好用又不失灵活，既可以单独完成构建也可以和其它工具搭配使用。其缺点是和 Grunt 类似，集成度不高，要写很多配置后才可以用，无法做到开箱即用。
+
+可以将Gulp 看作 Grunt 的加强版。相对于 Grunt，Gulp增加了监听文件、读写文件、流式处理的功能。
+
+### Webpack
+
+[Webpack](https://webpack.js.org/) 是一个打包模块化 JavaScript 的工具，在 Webpack 里一切文件皆模块，通过 Loader 转换文件，通过 Plugin 注入钩子，最后输出由多个模块组合成的文件。Webpack 专注于构建模块化项目。
+
+其官网的首页图很形象的画出了 Webpack 是什么，如下：
+
+![1569474242621](webpack%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%80%BB%E7%BB%93/1569474242621.png)
+
+一切文件：JavaScript、CSS、SCSS、图片、模板，在 Webpack 眼中都是一个个模块，这样的好处是能清晰的描述出各个模块之间的依赖关系，以方便 Webpack 对模块进行组合和打包。 经过 Webpack 的处理，最终会输出浏览器能使用的静态资源。
+
+Webpack 具有很大的灵活性，能配置如何处理文件，大致使用如下：
+
+```js
+module.exports = {
+  // 所有模块的入口，Webpack 从入口开始递归解析出所有依赖的模块
+  entry: './app.js',
+  output: {
+    // 把入口所依赖的所有模块打包成一个文件 bundle.js 输出 
+    filename: 'bundle.js'
+  }
+}
+```
+
+Webpack的优点是：
+
+- 专注于处理模块化的项目，能做到开箱即用一步到位；
+- 通过 Plugin 扩展，完整好用又不失灵活；
+- 使用场景不仅限于 Web 开发；
+- 社区庞大活跃，经常引入紧跟时代发展的新特性，能为大多数场景找到已有的开源扩展；
+- 良好的开发体验。
+
+Webpack的缺点是只能用于采用模块化开发的项目。
+
+### 为什么选择 Webpack
+
+上面介绍的构建工具是按照它们诞生的时间排序的，它们是时代的产物，侧面反映出 Web 开发的发展趋势如下：
+
+1. 在 Npm Script 和 Grunt 时代，Web 开发要做的事情变多，流程复杂，自动化思想被引入，用于简化流程；
+2. 在 Gulp 时代开始出现一些新语言用于提高开发效率，流式处理思想的出现是为了简化文件转换的流程，例如将 ES6 转换成 ES5。
+3. 在 Webpack 时代由于单页应用的流行，一个网页的功能和实现代码变得庞大，Web 开发向模块化改进。
+
+这些构建工具都有各自的定位和专注点，它们之间既可以单独地完成任务，也可以相互搭配起来弥补各自的不足。 在了解这些常见的构建工具后，你需要根据自己的需求去判断应该如何选择和搭配它们才能更好地完成自己的需求。
+
+经过多年的发展， Webpack 已经成为构建工具中的首选，这是有原因的：
+
+- 大多数团队在开发新项目时会采用紧跟时代的技术，这些技术几乎都会采用“模块化+新语言+新框架”，Webpack 可以为这些新项目提供一站式的解决方案；
+- Webpack 有良好的生态链和维护团队，能提供良好的开发体验和保证质量；
+- Webpack 被全世界的大量 Web 开发者使用和验证，能找到各个层面所需的教程和经验分享。
+
+## 使用Webpack 
+
+### 安装 Webpack 到本项目
+
+在开始给项目加入构建前， 在安装 Webpack 前请确保你的系统安装了5.0.0及以上版本的 [Node.js](https://nodejs.org/)。你还需要先新建一个 Web 项目，进入项目根目录执行 `npm init` 来初始化最简单的采用了模块化开发的项目；
+
+要安装 Webpack 到本项目，可按照你的需要选择以下任意命令运行：
+
+```bash
+# npm i -D 是 npm install --save-dev 的简写，是指安装模块并保存到 package.json 的 devDependencies
+# 安装最新稳定版
+npm i -D webpack
+
+# 安装指定版本
+npm i -D webpack@<version>
+
+# 安装最新体验版本
+npm i -D webpack@beta
+```
+
+安装完后你可以通过这些途径运行安装到本项目的 Webpack：
+
+- 在项目根目录下对应的命令行里通过 `node_modules/.bin/webpack` 运行 Webpack 可执行文件。
+
+- 在 [Npm Script](http://webpack.wuhaolin.cn/1入门/常见的构建工具及对比/npm_script.md) 里定义的任务会优先使用本项目下的 Webpack，代码如下：
+
+  ```json
+  "scripts": {
+      "start": "webpack --config webpack.config.js"
+  }
+  ```
+
+### 安装 Webpack 到全局
+
+安装到全局后你可以在任何地方共用一个 Webpack 可执行文件，而不用各个项目重复安装，安装方式如下：
+
+```bash
+npm i -g webpack
+```
+
+<div class="note danger">虽然介绍了以上两种安装方式，但是我们推荐安装到本项目，原因是可防止不同项目依赖不同版本的 Webpack 而导致冲突。</div>
+
+### 使用 Webpack
+
+#### 默认配置
+
+Webpack 在执行构建时默认会从项目根目录下的 `webpack.config.js` 文件读取配置，所以你还需要新建它，其内容如下：
+
+```js
+const path = require('path');
+
+module.exports = {
+  // JavaScript 执行入口文件
+  entry: './main.js',
+  output: {
+    // 把所有依赖的模块合并输出到一个 bundle.js 文件
+    filename: 'bundle.js',
+    // 输出文件都放到 dist 目录下
+    path: path.resolve(__dirname, './dist'),
+  }
+};
+```
+
+由于 Webpack 构建运行在 Node.js 环境下，所以该文件最后需要通过 CommonJS 规范导出一个描述如何构建的 `Object` 对象。
+
+#### 使用loader
+
+Webpack 把一切文件看作模块，CSS 文件也不例外，Webpack 不原生支持解析 CSS 文件。要支持非 JavaScript 类型的文件，需要使用 Webpack 的 Loader 机制。Webpack的配置修改使用如下：
+
+```js
+const path = require('path');
+
+module.exports = {
+  // JavaScript 执行入口文件
+  entry: './main.js',
+  output: {
+    // 把所有依赖的模块合并输出到一个 bundle.js 文件
+    filename: 'bundle.js',
+    // 输出文件都放到 dist 目录下
+    path: path.resolve(__dirname, './dist'),
+  },
+  module: {
+    rules: [
+      {
+        // 用正则去匹配要用该 loader 转换的 CSS 文件
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader?minimize'],
+      }
+    ]
+  }
+};
+```
+
+Loader 可以看作具有文件转换功能的翻译员，配置里的 `module.rules` 数组配置了一组规则，告诉 Webpack 在遇到哪些文件时使用哪些 Loader 去加载和转换。 如上配置告诉 Webpack 在遇到以 `.css` 结尾的文件时先使用 `css-loader` 读取 CSS 文件，再交给 `style-loader` 把 CSS 内容注入到 JavaScript 里。 在配置 Loader 时需要注意的是：
+
+- `use` 属性的值需要是一个由 Loader 名称组成的数组，Loader 的执行顺序是由后到前的；
+- 每一个 Loader 都可以通过 URL querystring 的方式传入参数，例如 `css-loader?minimize` 中的 `minimize` 告诉 `css-loader` 要开启 CSS 压缩。
+
+Webpack 构建前要先安装新引入的 Loader：
+
+```bash
+npm i -D style-loader css-loader
+```
+
+给 Loader 传入属性的方式除了有 querystring 外，还可以通过 Object 传入，以上的 Loader 配置可以修改为如下：
+
+```js
+use: [
+  'style-loader', 
+  {
+    loader:'css-loader',
+    options:{
+      minimize:true,
+    }
+  }
+]
+```
+
+除了在 `webpack.config.js` 配置文件中配置 Loader 外，还可以在源码中指定用什么 Loader 去处理文件。 以加载 CSS 文件为例，修改上面例子中的 `main.js` 如下：
+
+```js
+require('style-loader!css-loader?minimize!./main.css');
+```
+
+这样就能指定对 `./main.css` 这个文件先采用 css-loader 再采用 style-loader 转换。
+
+#### 使用 Plugin
 
 plugin 可以在 webpack 运行到某一时刻的时候，帮你做一些事情。
 
@@ -177,8 +474,6 @@ module.exports = {
 ```
 
 ### css-loader style-loader
-
-## Webpack 核心概念
 
 ## Webpack 进阶
 
