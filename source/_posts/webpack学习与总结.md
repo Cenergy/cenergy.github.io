@@ -451,6 +451,26 @@ Webpack 启动后会从 Entry 里配置的 Module 开始递归解析 Entry 依�
 
 ## webpack的配置
 
+### Entry
+
+entry 是配置模块的入口，可抽象成输入， Webpack 执行构建的第 步将从入 口开始，搜寻及递归解析出所有入口依赖的模块。entry 配置是必填的，若不填则将导致 Webpack 报错、退出。
+
+#### context 
+
+Webpack 在寻找相对路径的文件时会以 context 为根目录， context 默认为执行启动
+Webpack 时所在的当前工作目录。如果想改变 context 的默认配置，则可以在配置文件里这
+样设置它
+
+```js
+module.exports = {
+context: path.resolve(__dirname,'app')
+}
+```
+
+
+
+
+
 ### loader
 
 #### file-loader
