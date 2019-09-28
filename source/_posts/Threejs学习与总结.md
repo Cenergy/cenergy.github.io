@@ -69,33 +69,21 @@ three动画程序一般选择requestAnimationFrame方法，而不是setInterval(
 
 ![1569645786552](Threejs%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%80%BB%E7%BB%93/1569645786552.png)
 
-```flow
-flowchat
-st=>start: 开始
-e=>end: 结束
-op=>operation: 我的操作
-cond=>condition: 确认？
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
-
 ```mermaid
 graph LR
-A[长方形] -- 链接 --> B((圆))
-A --> C(圆角长方形)
-B --> D{菱形}
-C --> D
+A[设置材质效果]  --> C(材质类型)
+C --> D(MeshBasicMaterial)
+D --> D1(基础网格材质)
+D --> D2(不受光照影响的材质)
+C --> E(MeshLambertMaterial)
+E --> E1(Lambert网格材质)
+E --> E2(与光照有反应,漫反射)
+C --> F(MeshPhongMaterial)
+F --> F1(与光照有反应)
+F --> F2(高光材质)
 ```
 
-```mermaid
-gantt
-        dateFormat  YYYY-MM-DD
-        title Adding GANTT diagram functionality to mermaid
-        section 现有任务
-        已完成               :done,    des1, 2014-01-06,2014-01-08
-        进行中               :active,  des2, 2014-01-09, 3d
-        计划中               :         des3, after des2, 5d
-```
+![1569665791516](Threejs%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%80%BB%E7%BB%93/1569665791516.png)
+
+
 
