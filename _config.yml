@@ -78,7 +78,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next7
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -117,31 +117,38 @@ encrypt:
 #   total_symbols: true
 #   total_time: true
 
-# # 博文压缩
-# neat_enable: true
-# # 压缩html
-# neat_html:
-#   enable: true
-#   exclude:
-#     - "google078dd53431bb11ee.html"
-# # 压缩css
-# neat_css:
-#   enable: true
-#   exclude:
-#     - "**/*.min.css"
-# # 压缩js
-# neat_js:
-#   enable: true
-#   mangle: true
-#   output:
-#   compress:
-#   exclude:
-#     - "**/*.min.js"
-#     - "**/jquery.fancybox.pack.js"
-#     - "**/index.js"
-#     - "**/love.js"
-#     - "**/**min.js"
-# # 压缩博文配置结束
+# 博文压缩
+neat_enable: true
+# 压缩html
+neat_html:
+  enable: true
+  exclude:
+    - "google078dd53431bb11ee.html"
+# 压缩css
+neat_css:
+  enable: true
+  exclude:
+    - "**/*.min.css"
+# 压缩js
+neat_js:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+    - "**/*.min.js"
+    - "**/jquery.fancybox.pack.js"
+    - "**/algolia-search.js"
+    - "**/local-search.js"
+    - "**/pisces.js"
+    - "**/bookmark.js"
+    - "**/next-boot.js"
+    - "**/utils.js"
+    - "**/muse.js"
+    - "**/index.js"
+    - "**/love.js"
+    - "**/**min.js"
+# 压缩博文配置结束
 
 robotstxt:
   useragent: "*"

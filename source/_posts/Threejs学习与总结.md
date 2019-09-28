@@ -5,7 +5,7 @@ date: 2019-09-28 10:19:55
 tags:
 ---
 
-## three.js-master目录结构
+## three.js-master 目录结构
 
 ```
 three.js-master
@@ -37,65 +37,51 @@ three.js-master
 
 ## 场景
 
-### 网格模型Mesh
+### 网格模型 Mesh
 
-#### 几何体对象Geometry
+#### 几何体对象 Geometry
 
-#### 材质对象Material
+#### 材质对象 Material
 
-### 光照Light
+### 光照 Light
 
 #### 平行光、环境光、点光源
 
-## 相机Camera
+## 相机 Camera
 
 ```js
 // 设置相机指向(指向的场景对象)
-camera.lookAt(scene.position)  
+camera.lookAt(scene.position);
 ```
 
-## 渲染器Renderer
+## 渲染器 Renderer
 
 ```js
 // 设置背景颜色
-renderer.setClearColor(0xb9d3ff,1)
+renderer.setClearColor(0xb9d3ff, 1);
 ```
 
-渲染器render方法
+渲染器 render 方法
 
 ![1569641783057](Threejs%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%80%BB%E7%BB%93/1569641783057.png)
 
-three动画程序一般选择requestAnimationFrame方法，而不是setInterval()方法设置固定的刷新频率，也就是周期性执行时间。
+three 动画程序一般选择 requestAnimationFrame 方法，而不是 setInterval()方法设置固定的刷新频率，也就是周期性执行时间。
 
 ![1569645786552](Threejs%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%80%BB%E7%BB%93/1569645786552.png)
 
-```flow
-flowchat
-st=>start: 开始
-e=>end: 结束
-op=>operation: 我的操作
-cond=>condition: 确认？
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
-
 ```mermaid
 graph LR
-A[长方形] -- 链接 --> B((圆))
-A --> C(圆角长方形)
-B --> D{菱形}
-C --> D
+A[设置材质效果]  --> C(材质类型)
+C --> D(MeshBasicMaterial)
+D --> D1(基础网格材质)
+D --> D2(不受光照影响的材质)
+C --> E(MeshLambertMaterial)
+E --> E1(Lambert网格材质)
+E --> E2(与光照有反应,漫反射)
+C --> F(MeshPhongMaterial)
+F --> F1(与光照有反应)
+F --> F2(高光材质)
 ```
 
-```mermaid
-gantt
-        dateFormat  YYYY-MM-DD
-        title Adding GANTT diagram functionality to mermaid
-        section 现有任务
-        已完成               :done,    des1, 2014-01-06,2014-01-08
-        进行中               :active,  des2, 2014-01-09, 3d
-        计划中               :         des3, after des2, 5d
-```
-
+![1569665791516](Threejs%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%80%BB%E7%BB%93/1569665791516.png)
+going on
