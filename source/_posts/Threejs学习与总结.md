@@ -5,7 +5,7 @@ date: 2019-09-28 10:19:55
 tags:
 ---
 
-## three.js-master目录结构
+## three.js-master 目录结构
 
 ```
 three.js-master
@@ -37,35 +37,35 @@ three.js-master
 
 ## 场景
 
-### 网格模型Mesh
+### 网格模型 Mesh
 
-#### 几何体对象Geometry
+#### 几何体对象 Geometry
 
-#### 材质对象Material
+#### 材质对象 Material
 
-### 光照Light
+### 光照 Light
 
 #### 平行光、环境光、点光源
 
-## 相机Camera
+## 相机 Camera
 
 ```js
 // 设置相机指向(指向的场景对象)
-camera.lookAt(scene.position)  
+camera.lookAt(scene.position);
 ```
 
-## 渲染器Renderer
+## 渲染器 Renderer
 
 ```js
 // 设置背景颜色
-renderer.setClearColor(0xb9d3ff,1)
+renderer.setClearColor(0xb9d3ff, 1);
 ```
 
-渲染器render方法
+渲染器 render 方法
 
 ![1569641783057](Threejs%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%80%BB%E7%BB%93/1569641783057.png)
 
-three动画程序一般选择requestAnimationFrame方法，而不是setInterval()方法设置固定的刷新频率，也就是周期性执行时间。
+three 动画程序一般选择 requestAnimationFrame 方法，而不是 setInterval()方法设置固定的刷新频率，也就是周期性执行时间。
 
 ![1569645786552](Threejs%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%80%BB%E7%BB%93/1569645786552.png)
 
@@ -84,6 +84,4 @@ F --> F2(高光材质)
 ```
 
 ![1569665791516](Threejs%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%80%BB%E7%BB%93/1569665791516.png)
-
-
-
+going on
