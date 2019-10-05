@@ -436,6 +436,14 @@ Webpack 可以在启动 Webpack 时通过 `webpack --watch` 来开启监听模�
 
 DevServer 还有一种被称作模块热替换的刷新技术。 模块热替换能做到在不重新加载整个网页的情况下，通过将被更新过的模块替换老的模块，再重新执行一次来实现实时预览。 模块热替换相对于默认的刷新机制能提供更快的响应和更好的开发体验。 模块热替换默认是关闭的，要开启模块热替换，你只需在启动 DevServer 时带上 `--hot` 参数，重启 DevServer 后再去更新文件就能体验到模块热替换的神奇了。
 
+```js
+const config=require('./webpack.config.js');
+const complier=wepack(config)
+// 在node中使用webpack的方法。
+```
+
+
+
 ### 核心概念
 
  Webpack 有以下几个核心概念。

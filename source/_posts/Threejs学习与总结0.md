@@ -71,6 +71,8 @@ Three.js 在其库的扩展性，易用性以及功能方面有很好的优势�
 
 #### 第一个案例
 
+<div class="note info">所有关于Threejs的代码均在https://github.com/Cenergy/webpack-threejs.git</div>
+
 ```html
 <!DOCTYPE html>
 <html>
