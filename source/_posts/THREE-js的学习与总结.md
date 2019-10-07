@@ -20,7 +20,7 @@ tags:
 
 [THREE.js文档](https://threejs.org/docs/index.html#manual/zh/introduction/Creating-a-scene)
 
-
+<!--more-->
 
 #### 场景
 
