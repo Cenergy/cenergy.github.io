@@ -24,11 +24,13 @@ tags: Threejs
 4. 将观察到的场景渲染到屏幕上的指定区域
    - Three中使用Renderer完成这一工作
 
-### 构建场景 Scene
+<div class="note info">拿电影来类比的话，场景对应于整个布景空间，相机是拍摄镜头，渲染器用来把拍摄好的场景转换成胶卷。</div>
 
-场景是所有物体的容器，也对应着我们创建的三维世界。
+### 场景 Scene
 
-### 创建相机 Camera
+场景是所有物体的容器，也对应着我们创建的三维世界。场景允许你设置哪些对象被Three.js渲染以及渲染在哪里。在场景中放置对象、灯光和相机。
+
+### 相机 Camera
 
 ```js
 // 初始化相机
@@ -73,7 +75,7 @@ Camera是三维世界中的观察者，为了观察这个世界，首先我们�
 
 第二行，我们设置了相机的位置。
 
-### 创建渲染器 Renderer
+### 渲染器 Renderer
 
 ```js
 //初始化渲染器
@@ -90,7 +92,7 @@ function initRenderer() {
 
 第三行，`renderer.domElement` 是在实例化渲染器时生成的一个 Canvas 画布，渲染器渲染界面生成的内容，都将在这个画布上显示。所以，我们将这个画布添加到了 DOM 当中，来显示渲染的内容。
 
-### 创建模型 Object3D
+### 模型 Object3D
 
 渲染器，场景和相机都全了，是不是就能显示东西了？不能！因为场景内没有内容，即使渲染出来也是一片漆黑，所以我们需要往场景里面添加内容。接下来，我们将查看 initMesh 方法，看看如何创建一个最简单的模型：
 
@@ -124,7 +126,7 @@ Three中供显示的物体有很多，它们都继承自Object3D类
 
 在Three中，Mesh的构造函数是这样的：Mesh( geometry, material ) 
 geometry是它的形状，material是它的材质。 
-不止是Mesh，创建很多物体都要用到这两个属性。下面我们来看看这两个重要的属性。
+不止是Mesh，创建很多物体都要用到这两个属性。下面我们来看看这两个重要的属性。Material和Geometry是相辅相成的，必须结合使用。
 
 ##### Geometry
 
@@ -143,7 +145,7 @@ Material，材质，这就没有形状那么直观了。
 纹理嘛，其实就是‘图’了。 
 Three提供了多种材质可供选择，能够自由地选择漫反射/镜面反射等材质。
 
-### 创建光影Light
+### 光影Light
 
 神说：要有光！ 
 光影效果是让画面丰富的重要因素。 
@@ -178,7 +180,33 @@ mesh.rotation.y += 0.02; //每帧网格模型的沿y轴旋转0.02弧度
 
 每一个实例化的网格对象都有一个 rotation 的值，通过设置这个值可以让立方体旋转起来。在每一帧里，我们让立方体沿 x 轴方向旋转0.01弧度，沿 y 轴旋转0.02弧度（1π 弧度等于180度角度）。
 
-### Three.js 的性能检测插件
+### Threejs目录结构
+
+```
+three.js-master
+└───build——src目录下各个代码模块打包后的结果
+    │───three.js——开发的时候.html文件中要引入的threejs引擎库，和引入jquery一样，可以辅助浏览器调试
+    │───three.min.js——three.js压缩后的结构文件体积更小，可以部署项目的时候在.html中引入。
+    │
+└───docs——Three.js API文档文件
+    │───index.html——打开该文件可以实现离线查看threejs API文档
+    │
+└───editor——Three.js的可视化编辑器，可以编辑3D场景
+    │───index.html——打开应用程序
+    │
+└───docs——Three.js API文档文件
+    │───index.html——打开该文件可以实现离线查看threejs API文档
+    │
+└───examples——里面有大量的threejs案例，平时可以通过代码编辑全局查找某个API、方法或属性来定位到一个案例
+    │
+└───src——Three.js引擎的各个模块，可以通过阅读源码深度理解threejs引擎
+    │───index.html——打开该文件可以实现离线查看threejs API文档
+    │
+└───utils——一些辅助工具
+    │───\utils\exporters\blender——blender导出threejs文件的插件
+```
+
+### Threejs性能检测插件
 
 在 Three.js 里面，遇到最多的问题就是性能问题，所以我们需要时刻检测当前的 Three.js 的性能。现在 Three.js 常使用的一款插件叫 stats。接下来我们看看如何将 stats 插件在 Three.js 的项目中使用。
 
