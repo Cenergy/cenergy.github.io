@@ -25,7 +25,6 @@ tags: Threejs
    - Three中使用Renderer完成这一工作
 
 <div class="note info">拿电影来类比的话，场景对应于整个布景空间，相机是拍摄镜头，渲染器用来把拍摄好的场景转换成胶卷。</div>
-
 ### 场景 Scene
 
 场景是所有物体的容器，也对应着我们创建的三维世界。场景允许你设置哪些对象被Three.js渲染以及渲染在哪里。在场景中放置对象、灯光和相机。
@@ -180,32 +179,6 @@ mesh.rotation.y += 0.02; //每帧网格模型的沿y轴旋转0.02弧度
 
 每一个实例化的网格对象都有一个 rotation 的值，通过设置这个值可以让立方体旋转起来。在每一帧里，我们让立方体沿 x 轴方向旋转0.01弧度，沿 y 轴旋转0.02弧度（1π 弧度等于180度角度）。
 
-### Threejs目录结构
-
-```
-three.js-master
-└───build——src目录下各个代码模块打包后的结果
-    │───three.js——开发的时候.html文件中要引入的threejs引擎库，和引入jquery一样，可以辅助浏览器调试
-    │───three.min.js——three.js压缩后的结构文件体积更小，可以部署项目的时候在.html中引入。
-    │
-└───docs——Three.js API文档文件
-    │───index.html——打开该文件可以实现离线查看threejs API文档
-    │
-└───editor——Three.js的可视化编辑器，可以编辑3D场景
-    │───index.html——打开应用程序
-    │
-└───docs——Three.js API文档文件
-    │───index.html——打开该文件可以实现离线查看threejs API文档
-    │
-└───examples——里面有大量的threejs案例，平时可以通过代码编辑全局查找某个API、方法或属性来定位到一个案例
-    │
-└───src——Three.js引擎的各个模块，可以通过阅读源码深度理解threejs引擎
-    │───index.html——打开该文件可以实现离线查看threejs API文档
-    │
-└───utils——一些辅助工具
-    │───\utils\exporters\blender——blender导出threejs文件的插件
-```
-
 ### Threejs性能检测插件
 
 在 Three.js 里面，遇到最多的问题就是性能问题，所以我们需要时刻检测当前的 Three.js 的性能。现在 Three.js 常使用的一款插件叫 stats。接下来我们看看如何将 stats 插件在 Three.js 的项目中使用。
@@ -332,7 +305,6 @@ function animate() {
 
 ![](Threejs学习和总结基础篇/scence.png)
 
-<!--more-->
 
 ### 场景的结构
 
@@ -708,7 +680,6 @@ two.add(controls, "positionZ", -1, 1).onChange(updatePosition);
 
 ![](Threejs学习和总结基础篇/geometry-1570631173098.png)
 
-<!--more-->
 
 ### Geometry 和 BufferGeometry
 
@@ -991,7 +962,6 @@ Geometry 和 BufferGeomety 内置了一些常用的方法，在每一种几何�
 
 ![](Threejs学习和总结基础篇/materials.png)
 
-<!--more-->
 
 简单的说，就是物体看起来是什么质地。材质可以看成是材料和质感的结合。在渲染程序中，它是表面各种可视属性的结合，这些可视属性是指表面的色彩、纹理、光滑度、透明度、反射率、折射率、发光度等。Three.js 给我们封装好了大部分的材质效果，避免我们使用复杂的 Shader 语言自己去实现。接下来我们先介绍下 Material 常用的一些属性和方法。
 
@@ -1250,7 +1220,6 @@ scene.add( mesh ); //将网格添加到场景
 
 ### 相机通用属性和方法
 
-<!--more-->
 
 我们常用的相机有正交相机（OrthographicCamera）和透视相机（PerspectiveCamera）两种，用于来捕获场景内显示的物体模型。它们有一些通用的属性和方法。
 
