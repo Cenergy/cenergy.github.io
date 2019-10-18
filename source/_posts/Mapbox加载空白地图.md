@@ -23,7 +23,6 @@ date: 2019-10-16 20:37:23
       name="viewport"
       content="initial-scale=1,maximum-scale=1,user-scalable=no"
     />
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js"></script>
     <link
       href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css"
