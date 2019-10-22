@@ -15,14 +15,14 @@ mapbox-gl 的表达式可以将任何布局`layout`属性，绘图`paint`属性�
 
 ### 图层样式结构
 
-图层样式设置的结构为JSON结构，根级别结构如下：
+图层样式设置的结构为 JSON 结构，根级别结构如下：
 
 ```json
 {
     "id": "road-layer-1",
     "type": "line",
     "source": "RoadSource",
-    "source-layer": "Road",   
+    "source-layer": "Road",
     "layout": {...},
     "paint": {...},
     "minzoom": 6,
@@ -33,13 +33,13 @@ mapbox-gl 的表达式可以将任何布局`layout`属性，绘图`paint`属性�
 
 字段定义说明如下：
 
-**id**：图层ID，必填项；说明：（值唯一，不能重复）
+**id**：图层 ID，必填项；说明：（值唯一，不能重复）
 
 **type**：图层渲染类型，必填项；（值域范围，参考本章「概述」）
 
-**source**：所使用的数据源ID，说明：（当图层类型不为background时，该值为必填项）
+**source**：所使用的数据源 ID，说明：（当图层类型不为 background 时，该值为必填项）
 
-**source-layer**：所使用的vector数据源中的图层标识，说明：（当数据源类型为vector时，该值为必填项；其它数据源类型，去除该参数）
+**source-layer**：所使用的 vector 数据源中的图层标识，说明：（当数据源类型为 vector 时，该值为必填项；其它数据源类型，去除该参数）
 
 **layout**：布局属性
 
@@ -49,7 +49,7 @@ mapbox-gl 的表达式可以将任何布局`layout`属性，绘图`paint`属性�
 
 **maxzoom**：图层可展示的最大缩放等级值，选填项；说明：（值为小数或整数，值域范围[0,24]，不设置该参数则地图允许的最大缩放等级内都可显示）
 
-**filter**：所使用数据源的features数据的过滤条件，选填项；说明：（当数据源features数据信息和filter条件匹配时图层才显示）
+**filter**：所使用数据源的 features 数据的过滤条件，选填项；说明：（当数据源 features 数据信息和 filter 条件匹配时图层才显示）
 
 表达式定义了一个公式，用于使用以下描述的*运算符*计算属性的值。Mapbox GL 提供的表达式运算符集包括：
 
@@ -145,31 +145,31 @@ Expressions 表达式使用类似 Lisp 的语法，表达式数组的第一个�
 
 ### Composition
 
-一个单独的表达式可能使用data操作符、相机操作符和其他操作符的混合。这种组合表达式使一个图层的渲染决定于缩放等级和单独要素属性的组合。
+一个单独的表达式可能使用 data 操作符、相机操作符和其他操作符的混合。这种组合表达式使一个图层的渲染决定于缩放等级和单独要素属性的组合。
 
 ```json
 {
-    "circle-radius": [
-        "interpolate", ["linear"], ["zoom"],
-        // when zoom is 0, set each feature's circle radius to the value of its "rating" property
-        0, ["get", "rating"],
-        // when zoom is 10, set each feature's circle radius to four times the value of its "rating" property
-        10, ["*", 4, ["get", "rating"]]
-    ]
+  "circle-radius": [
+    "interpolate",
+    ["linear"],
+    ["zoom"],
+    // when zoom is 0, set each feature's circle radius to the value of its "rating" property
+    0,
+    ["get", "rating"],
+    // when zoom is 10, set each feature's circle radius to four times the value of its "rating" property
+    10,
+    ["*", 4, ["get", "rating"]]
+  ]
 }
 ```
 
-一个同时使用了data和camera运算符的表达式同时考虑了data和camera表达式。
-
-
+一个同时使用了 data 和 camera 运算符的表达式同时考虑了 data 和 camera 表达式。
 
 http://dev.minedata.cn/api/dev/js/guide/layer/style
 
+filter 规格
 
-
-filter规格
-
-fliter表示从所有图层过滤出特定特征的图层，有以下几种过滤形式：
+fliter 表示从所有图层过滤出特定特征的图层，有以下几种过滤形式：
 
 1、存在过滤：
 
@@ -241,27 +241,27 @@ fliter表示从所有图层过滤出特定特征的图层，有以下几种过�
 
 函数对象语句
 
-图层样式的某些layout或paint属性值支持函数对象语句的方式，属性值的最终结果由当前缩放等级或feature属性值进行相关计算而取得。
+图层样式的某些 layout 或 paint 属性值支持函数对象语句的方式，属性值的最终结果由当前缩放等级或 feature 属性值进行相关计算而取得。
 
-函数对象语句的结构为JSON结构，根级别结构如下：
+函数对象语句的结构为 JSON 结构，根级别结构如下：
 
 ```
 {
     "property": "kind",
     "base": 1,
     "type": "interval",
-    "default": "#000000",   
+    "default": "#000000",
     "stops": [...]
 }
 ```
 
 字段定义说明如下：
 
-**property**：具体的feature属性标识；（非必输项）
+**property**：具体的 feature 属性标识；（非必输项）
 
-**base**：差值运算的曲率指数基数，控制最终计算结果值的增长率，值越大，最终计算结果值越大，值为1时，函数采用线性计算方式；（数值类型，默认值为1）
+**base**：差值运算的曲率指数基数，控制最终计算结果值的增长率，值越大，最终计算结果值越大，值为 1 时，函数采用线性计算方式；（数值类型，默认值为 1）
 
-**stops**：差值运算项，定义输入值和输出值的集合，每一个stop由一个输入值和一个输出值组成；（数组形式，当type不为'identity'时，stops为必输项）
+**stops**：差值运算项，定义输入值和输出值的集合，每一个 stop 由一个输入值和一个输出值组成；（数组形式，当 type 不为'identity'时，stops 为必输项）
 
 **type**：函数对象计算类型；（值域为["identity", "exponential","interval", "categorical"]，默认值为'interval'）
 
@@ -277,7 +277,7 @@ fliter表示从所有图层过滤出特定特征的图层，有以下几种过�
 }
 ```
 
-**2、exponential**：指数类型，最终输出值由stops中的差值项进行区间范围内的指数级差值计算生成，stops中的输入参数必须为数值类型；
+**2、exponential**：指数类型，最终输出值由 stops 中的差值项进行区间范围内的指数级差值计算生成，stops 中的输入参数必须为数值类型；
 
 ```
 /*示例：线的颜色值由feature中的price值进行区间指数级差值运算取得*/
@@ -291,7 +291,7 @@ fliter表示从所有图层过滤出特定特征的图层，有以下几种过�
 }
 ```
 
-**3、interval**：区间类型，最终输出值由stops中的差值项进行区间范围内的阶梯型差值计算生成，stops中的输入参数必须为数值类型；
+**3、interval**：区间类型，最终输出值由 stops 中的差值项进行区间范围内的阶梯型差值计算生成，stops 中的输入参数必须为数值类型；
 
 ```
 /*示例：线的颜色值由feature中的status值进行区间差值运算取得*/
@@ -313,7 +313,7 @@ fliter表示从所有图层过滤出特定特征的图层，有以下几种过�
 }
 ```
 
-**4、categorical**：种别类型，最终输出值完全匹配stops中的输入值对应的输出值；
+**4、categorical**：种别类型，最终输出值完全匹配 stops 中的输入值对应的输出值；
 
 ```
 /*示例：面颜色由feature中的的属性字段space_type的值匹配stop中的输入值取得输出值*/
@@ -323,14 +323,14 @@ fliter表示从所有图层过滤出特定特征的图层，有以下几种过�
         "type": "categorical",
         "stops": [[1, "#f8e4d4"], [3, "#f5e8ca"], [5, "#f1d4ef"], [7, "#f7e8c3"], [9, "#f0d3ef"]]
         "default": "#f1ebe7"
-    }     
+    }
 }
 ```
 
 **default**：默认值，当差值运算没有结果时取用默认值；会在以下境况中遇到：
 
-1、函数对象为**categorical**类型：当feature属性值不匹配stops中的输入值时；
+1、函数对象为**categorical**类型：当 feature 属性值不匹配 stops 中的输入值时；
 
-2、函数对象为**identity**类型：当feature属性值不存在或属性值无效时；
+2、函数对象为**identity**类型：当 feature 属性值不存在或属性值无效时；
 
-3、函数对象为**interval或exponential**类型：当feature属性值不是数值类型时；
+3、函数对象为**interval 或 exponential**类型：当 feature 属性值不是数值类型时；
