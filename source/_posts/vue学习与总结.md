@@ -3,48 +3,48 @@ title: vue学习与总结
 tags: vue
 abbrlink: 3d0c447
 date: 2019-09-16 09:29:36
-categories: 
+categories:
   - 编程
   - 更新中
 ---
 
 ## 插值表达式
 
+
+
 <!--more-->
 
 - v-cloak
-
 - v-text
-
 - v-html
 
-- v-bind(缩写:)
+> 使用 v-cloak 能够解决 插值表达式闪烁的问题，`[v-cloak] {display: none;}`。默认 v-text 是没有闪烁问题的，v-text会覆盖元素中原本的内容，但是插值表达式  只会替换自己的这个占位符，不会把整个元素的内容清空
 
-- v-on(缩写@)
+* v-bind(缩写:)
 
-- v-model 只能用于表单元素
+* v-on(缩写@)
 
-- v-for
+* v-model 只能用于表单元素
 
-- v-if
+* v-for
 
-- v-show
+* v-if
+
+* v-show
 
   > 一般来说，v-if 有更高的切换消耗而 v-show 有更高的初始渲染消耗。因此，如果需要频繁切换，v-show 较好，如果运行时条件不太可能改变 v-if 较好
 
 ## 事件修饰符
 
-- .stop       阻止冒泡
-- .prevent    阻止默认事件
-- .capture    添加事件侦听器时使用事件捕获模式
-- .self       只当事件在该元素本身（比如不是子元素）触发时触发回调
-- .once       事件只触发一次
+- .stop 阻止冒泡
+- .prevent 阻止默认事件
+- .capture 添加事件侦听器时使用事件捕获模式
+- .self 只当事件在该元素本身（比如不是子元素）触发时触发回调
+- .once 事件只触发一次
 
-## 在Vue中使用样式
+## 在 Vue 中使用样式
 
-
-
-### 使用class样式
+### 使用 class 样式
 
 1. 数组
 
@@ -70,8 +70,6 @@ categories:
 <h1 :class="{red:true, italic:true, active:true, thin:true}">这是一个邪恶的H1</h1>
 ```
 
-
-
 ### 使用内联样式
 
 1. 直接在元素上通过 `:style` 的形式，书写样式对象
@@ -82,7 +80,7 @@ categories:
 
 2. 将样式对象，定义到 `data` 中，并直接引用到 `:style` 中
 
-- 在data上定义样式：
+- 在 data 上定义样式：
 
 ```
 data: {
@@ -98,7 +96,7 @@ data: {
 
 3. 在 `:style` 中通过数组，引用多个 `data` 上的样式对象
 
-- 在data上定义样式：
+- 在 data 上定义样式：
 
 ```
 data: {
@@ -113,7 +111,7 @@ data: {
 <h1 :style="[h1StyleObj, h1StyleObj2]">这是一个善良的H1</h1>
 ```
 
-## Vue指令之`v-if`和`v-show`
+## Vue 指令之`v-if`和`v-show`
 
 > 一般来说，v-if 有更高的切换消耗而 v-show 有更高的初始渲染消耗。因此，如果需要频繁切换 v-show 较好，如果在运行时条件不大可能改变 v-if 较好。
 
@@ -123,7 +121,7 @@ data: {
 
 ### 私有过滤器
 
-1. HTML元素：
+1. HTML 元素：
 
 ```
 <td>{{item.ctime | dataFormat('yyyy-mm-dd')}}</td>
@@ -179,9 +177,7 @@ filters: { // 私有局部过滤器，只能在 当前 VM 对象所控制的 Vie
 
 ```
 
-
-
-> 使用ES6中的字符串新方法 String.prototype.padStart(maxLength, fillString='') 或 String.prototype.padEnd(maxLength, fillString='')来填充字符串；
+> 使用 ES6 中的字符串新方法 String.prototype.padStart(maxLength, fillString='') 或 String.prototype.padEnd(maxLength, fillString='')来填充字符串；
 
 ### 全局过滤器
 
@@ -230,8 +226,6 @@ Vue.filter('dataFormat', function (input, pattern = '') {
 
 ```
 
-
-
 > 注意：当有局部和全局两个名称相同的过滤器时候，会以就近原则进行调用，即：局部过滤器优先于全局过滤器被调用！
 
 ## 键盘修饰符以及自定义键盘修饰符
@@ -247,8 +241,6 @@ Vue.config.keyCodes.f2 = 113;
 ```
 <input type="text" v-model="name" @keyup.f2="add">
 ```
-
-
 
 ## 自定义指令
 
@@ -277,7 +269,7 @@ Vue.config.keyCodes.f2 = 113;
       }
   }
   ```
-  
+
 - 私有指令的定义
 
   ```js
@@ -290,12 +282,12 @@ Vue.config.keyCodes.f2 = 113;
   ```
 
   2. 自定义指令的使用方式：
-  
+
   ```
   <input type="text" v-model="searchName" v-focus v-color="'red'" v-font-weight="900">
   ```
 
-###  实现筛选的方式显示过滤-排序结果：
+### 实现筛选的方式显示过滤-排序结果：
 
 - 筛选框绑定到 VM 实例中的 `searchName` 属性：
 
@@ -306,7 +298,7 @@ Vue.config.keyCodes.f2 = 113;
 
 ```
 
-- 在使用 `v-for` 指令循环每一行数据的时候，不再直接 `item in list`，而是 `in` 一个 过滤的methods 方法，同时，把过滤条件`searchName`传递进去：
+- 在使用 `v-for` 指令循环每一行数据的时候，不再直接 `item in list`，而是 `in` 一个 过滤的 methods 方法，同时，把过滤条件`searchName`传递进去：
 
 ```
 <tbody>
@@ -346,36 +338,35 @@ search(name) {
 
 ```
 
+## JSONP 的实现原理
 
-
-## JSONP的实现原理
-
-- 由于浏览器安全限制，不允许AXAJ访问协议不同、域名不同、端口号不同——不符合同源策略的。
-- 可以通过动态创建script标签的形式，把script标签的src属性指向数据接口的地址。因为script标签不存在跨域限制，这种数据获取方式称之为JSONP
+- 由于浏览器安全限制，不允许 AXAJ 访问协议不同、域名不同、端口号不同——不符合同源策略的。
+- 可以通过动态创建 script 标签的形式，把 script 标签的 src 属性指向数据接口的地址。因为 script 标签不存在跨域限制，这种数据获取方式称之为 JSONP
 - 具体实现过程
+
   - 先在客户端定义一个回调方法，预定义对数据的操作；
-  
-  - 再把这个回调方法的名称通过URL传参的形式提交到服务器的数据接口；
-  
+
+  - 再把这个回调方法的名称通过 URL 传参的形式提交到服务器的数据接口；
+
   - 服务器数据接口组织好要发送给客户端的数据，再拿客户端传递过来的回调方法名称拼接出一个调用这个方法的字符串，发送给客户端解析执行；
-  
-  - 客户端拿到服务器的返回的字符串之后，当作script脚本执行。
-  
-  - Node.js 实现一个JSONP的请求例子
-  
+
+  - 客户端拿到服务器的返回的字符串之后，当作 script 脚本执行。
+
+  - Node.js 实现一个 JSONP 的请求例子
+
     ```
     const http = require('http');
         // 导入解析 URL 地址的核心模块
         const urlModule = require('url');
-    
+
         const server = http.createServer();
         // 监听 服务器的 request 请求事件，处理每个请求
         server.on('request', (req, res) => {
           const url = req.url;
-    
+
           // 解析客户端请求的URL地址
           var info = urlModule.parse(url, true);
-    
+
           // 如果请求的 URL 地址是 /getjsonp ，则表示要获取JSONP类型的数据
           if (info.pathname === '/getjsonp') {
             // 获取客户端指定的回调函数的名称
@@ -395,17 +386,17 @@ search(name) {
             res.end('404');
           }
         });
-    
+
         server.listen(3000, () => {
           console.log('server running at =http://127.0.0.1:3000');
         });
     ```
 
-##  [Vue中的动画](https://cn.vuejs.org/v2/guide/transitions.html)
+## [Vue 中的动画](https://cn.vuejs.org/v2/guide/transitions.html)
 
 ### 使用过渡类名
 
-1. HTML结构：
+1. HTML 结构：
 
 ```
 <div id="app">
@@ -533,7 +524,7 @@ methods: {
 </style>
 ```
 
-2. 定义DOM结构，其中，需要使用 transition-group 组件把v-for循环的列表包裹起来：
+2. 定义 DOM 结构，其中，需要使用 transition-group 组件把 v-for 循环的列表包裹起来：
 
 ```
   <div id="app">
@@ -545,7 +536,7 @@ methods: {
   </div>
 ```
 
-3. 定义 VM中的结构：
+3. 定义 VM 中的结构：
 
 ```
     // 创建 Vue 实例，得到 ViewModel
@@ -579,13 +570,13 @@ methods: {
 }
 ```
 
-## 定义Vue组件
+## 定义 Vue 组件
 
-什么是组件： 组件的出现，就是为了拆分Vue实例的代码量的，能够让我们以不同的组件，来划分不同的功能模块，将来我们需要什么样的功能，就可以去调用对应的组件即可；
+什么是组件： 组件的出现，就是为了拆分 Vue 实例的代码量的，能够让我们以不同的组件，来划分不同的功能模块，将来我们需要什么样的功能，就可以去调用对应的组件即可；
 组件化和模块化的不同：
 
 - 模块化： 是从代码逻辑的角度进行划分的；方便代码分层开发，保证每个功能模块的职能单一；
-- 组件化： 是从UI界面的角度进行划分的；前端的组件化，方便UI组件的重用；
+- 组件化： 是从 UI 界面的角度进行划分的；前端的组件化，方便 UI 组件的重用；
 
 ### 全局组件定义的三种方式
 
@@ -606,7 +597,7 @@ Vue.component('register', {
     });
 ```
 
-3. 将模板字符串，定义到script标签种：
+3. 将模板字符串，定义到 script 标签种：
 
 ```
 <script id="tmpl" type="x-template">
@@ -622,7 +613,7 @@ Vue.component('account', {
     });
 ```
 
-> 注意： 组件中的DOM结构，有且只能有唯一的根元素（Root Element）来进行包裹！
+> 注意： 组件中的 DOM 结构，有且只能有唯一的根元素（Root Element）来进行包裹！
 
 ### 组件中展示数据和响应事件
 
@@ -644,12 +635,29 @@ Vue.component('account', {
     });
 ```
 
-2. 在子组件中，如果将模板字符串，定义到了script标签中，那么，要访问子组件身上的`data`属性中的值，需要使用`this`来访问；
+2. 在子组件中，如果将模板字符串，定义到了 script 标签中，那么，要访问子组件身上的`data`属性中的值，需要使用`this`来访问；
+
+- 组件可以有自己的 data 数据
+- 组件的 data 和 实例的 data 有点不一样,实例中的 data 可以为一个对象,但是 组件中的 data 必须是一个方法
+- 组件中的 data 除了必须为一个方法之外,这个方法内部,还必须返回一个对象才行;
+- 组件中 的data 数据,使用方式,和实例中的 data 使用方式完全一样!!!
 
 ## 组件切换
 
 vue 提供了 component，来展示对应的名称组件
-component 是一个占位符,:is 属性，可以用来指定展示的组件的名称
+component 是一个占位符, :is 属性,可以用来指定要展示的组件的名称
+
+```html
+<div id="app">
+      <a href="" @click.prevent="componentId='login'">登录</a>
+      <a href="" @click.prevent="componentId='register'">注册</a>
+      <component :is="componentId"></component>
+</div>
+```
+
+当前学习了几个 Vue 提供的标签：
+
+>component,  template,  transition,  transitionGroup
 
 ## 父组件向子组件传值
 
