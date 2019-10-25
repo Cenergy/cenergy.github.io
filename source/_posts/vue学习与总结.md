@@ -10,31 +10,29 @@ categories:
 
 ## 插值表达式
 
-
-
-<!--more-->
-
 - v-cloak
 - v-text
 - v-html
 
-> 使用 v-cloak 能够解决 插值表达式闪烁的问题，`[v-cloak] {display: none;}`。默认 v-text 是没有闪烁问题的，v-text会覆盖元素中原本的内容，但是插值表达式  只会替换自己的这个占位符，不会把整个元素的内容清空
+> 使用 v-cloak 能够解决 插值表达式闪烁的问题，`[v-cloak] {display: none;}`。默认 v-text 是没有闪烁问题的，v-text 会覆盖元素中原本的内容，但是插值表达式 只会替换自己的这个占位符，不会把整个元素的内容清空
 
-* v-bind(缩写:)
+- v-bind(缩写:)
 
-* v-on(缩写@)
+- v-on(缩写@)
 
-* v-model 只能用于表单元素
+- v-model 只能用于表单元素
 
-* v-for
+- v-for
 
-* v-if
+- v-if
 
-* v-show
+- v-show
 
   > 一般来说，v-if 有更高的切换消耗而 v-show 有更高的初始渲染消耗。因此，如果需要频繁切换，v-show 较好，如果运行时条件不太可能改变 v-if 较好
 
 ## 事件修饰符
+
+<!--more-->
 
 - .stop 阻止冒泡
 - .prevent 阻止默认事件
@@ -640,7 +638,7 @@ Vue.component('account', {
 - 组件可以有自己的 data 数据
 - 组件的 data 和 实例的 data 有点不一样,实例中的 data 可以为一个对象,但是 组件中的 data 必须是一个方法
 - 组件中的 data 除了必须为一个方法之外,这个方法内部,还必须返回一个对象才行;
-- 组件中 的data 数据,使用方式,和实例中的 data 使用方式完全一样!!!
+- 组件中 的 data 数据,使用方式,和实例中的 data 使用方式完全一样!!!
 
 ## 组件切换
 
@@ -649,15 +647,15 @@ component 是一个占位符, :is 属性,可以用来指定要展示的组件的
 
 ```html
 <div id="app">
-      <a href="" @click.prevent="componentId='login'">登录</a>
-      <a href="" @click.prevent="componentId='register'">注册</a>
-      <component :is="componentId"></component>
+  <a href="" @click.prevent="componentId='login'">登录</a>
+  <a href="" @click.prevent="componentId='register'">注册</a>
+  <component :is="componentId"></component>
 </div>
 ```
 
 当前学习了几个 Vue 提供的标签：
 
->component,  template,  transition,  transitionGroup
+> component, template, transition, transitionGroup
 
 ## 父组件向子组件传值
 
