@@ -6,9 +6,11 @@
     "version": "3.9.0"
   },
   "scripts": {
+    "dev": "hexo clean && hexo generate ",
     "serve": "hexo clean && hexo generate && hexo server",
     "pro": "hexo clean && hexo generate && hexo deploy"
   },
+  "homepage": "https://blog.aigisss.com/",
   "dependencies": {
     "hexo": "^3.9.0",
     "hexo-abbrlink": "^2.0.5",

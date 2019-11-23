@@ -5,7 +5,7 @@ abbrlink: e1a3a842
 date: 2019-10-16 20:37:23
 ---
 
-由于mapbox 的服务器在国外，在开发的时候有可能加载很慢，而且大多时候与背景地图无关，此时可以加载一个空白的地图来增加加载速度从而提高开发效率。
+由于 mapbox 的服务器在国外，在开发的时候有可能加载很慢，而且大多时候与背景地图无关，此时可以加载一个空白的地图来增加加载速度从而提高开发效率。
 
 ![1571374714735](Mapbox%E5%8A%A0%E8%BD%BD%E7%A9%BA%E7%99%BD%E5%9C%B0%E5%9B%BE/1571374714735.jpg)
 
@@ -44,7 +44,7 @@ date: 2019-10-16 20:37:23
   <body>
     <div id="map"></div>
     <script>
-      var blankStyle = {
+      const blankStyle = {
         version: 8,
         name: "BlankMap",
         sources: {},
@@ -67,4 +67,3 @@ date: 2019-10-16 20:37:23
   </body>
 </html>
 ```
-
