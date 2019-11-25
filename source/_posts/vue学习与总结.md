@@ -734,3 +734,39 @@ component 是一个占位符, :is 属性,可以用来指定要展示的组件的
     });
   </script>
 ```
+
+## vue-router
+
+```js
+const router = new VueRouter({
+  routes: [
+    {
+      path: "/",
+      redirect: "/home",
+      meta: {
+        title: "首页"
+      }
+    },
+  ],
+  mode: "history",
+  linkActiveClass: "active"
+});
+
+// 前置守卫
+router.beforeEach((to, from, next) => {
+  // 从from到to
+  document.title = to.matched[0].meta.title || "vuebox";
+  next();
+});
+// 后置钩子
+router.afterEach((to, from) => {
+  console.log("----------");
+});
+```
+
+### keep-alive
+
+activated和deactivated只有该组件使用了keep-alive时才是有效的。
+
+组件内路由，`beforeRouteLeave(to,from,next){}`
+
