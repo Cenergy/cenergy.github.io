@@ -770,3 +770,5 @@ activated和deactivated只有该组件使用了keep-alive时才是有效的。
 
 组件内路由，`beforeRouteLeave(to,from,next){}`
 
+`include` 和`exclude`
+
