@@ -772,3 +772,30 @@ activated和deactivated只有该组件使用了keep-alive时才是有效的。
 
 `include` 和`exclude`
 
+## 插槽slot
+
+`vue2.x`
+
+```html
+<div slot="item-icon">
+	<span>前置图标</span>
+</div>
+```
+
+`vue3.x`
+
+```html
+<template v-slot:pre-icon>
+	<span>
+        前置图标
+	</span>
+</template>
+```
+
+
+
+```js
+this.$router.push('/home/'+123)   
+this.$router.push({path:'/home',query:{id:123}})
+```
+
