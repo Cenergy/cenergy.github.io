@@ -8,7 +8,7 @@
         <i class="fa fa-{{ theme.busuanzi_count.total_visitors_icon }}"></i>
       </span>
       <span class="site-uv" title="{{ __('footer.total_visitors') }}">
-        <span id="busuanzi_value_site_uv"></span>
+        5<span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
   {%- endif %}
